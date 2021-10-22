@@ -44,12 +44,12 @@ def prepare_grid(d):
     """ Prepares the Days X Hours grid for drawing events into it """
 
     # separate top bar from rest
-    d.line([(offset_top + bar_top - 1, offset_top), (offset_top + bar_top - 1, width)], width=2)
+    d.line([(offset_top + bar_left - 1, offset_left), (offset_left + bar_left - 1, width)], width=2)
 
     # separate all-day events from grid
     # d.line([(offset_left + bar_left + offset_allday, offset_left), (offset_left + bar_left + offset_allday, width)], width=2)
     # separate the left bar from the rest
-    d.line([(offset_left, offset_left + bar_left - 1), (height, offset_left + bar_left - 1,)], width=2)
+    d.line([(offset_left, offset_top + bar_top - 1), (height, offset_top + bar_top - 1,)], width=2)
 
     # draw the vertical day separators and day headlines
     for i in range(0, DAYS):
