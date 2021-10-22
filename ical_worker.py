@@ -151,11 +151,14 @@ def split_events(evs):
 def get_drawable_events():
     all_events = []
     for url in URLS:
-        if "icloud.com" in url:
-            evs = events(url, start=start, end=end, fix_apple=True)
-        else:
-            evs = events(url, start=start, end=end)
-        all_events.extend(evs)
+        try:
+            if "icloud.com" in url:
+                evs = events(url, start=start, end=end, fix_apple=True)
+            else:
+                evs = events(url, start=start, end=end)
+            all_events.extend(evs)
+        except:
+            print("Failed to load ", url)
     print("Got {} events".format(len(all_events)))
     all_events.sort()
     (drawables, all_days) = split_events(all_events)
