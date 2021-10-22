@@ -91,10 +91,10 @@ def draw_short_event(d, e):
     into several calls of draw_short_event and draw_allday_event.
     
     """
-    x_start = offset_top + bar_top + e["day"] * per_day + e["column"] * per_day / e["max_collision"]
-    y_start = offset_left + bar_left + offset_allday + math.floor((e["start"] - (BEGIN_DAY * 60)) * per_hour / 60)
+    x_start = offset_left + bar_left + e["day"] * per_day + e["column"] * per_day / e["max_collision"]
+    y_start = offset_top + bar_top+ offset_allday + math.floor((e["start"] - (BEGIN_DAY * 60)) * per_hour / 60)
     width = per_day / e["max_collision"]
-    y_end = offset_left + bar_left + offset_allday + math.floor((e["end"] - (BEGIN_DAY * 60)) * per_hour / 60)
+    y_end = offset_top + bar_top + offset_allday + math.floor((e["end"] - (BEGIN_DAY * 60)) * per_hour / 60)
     # clear the event's area and make the outline
     d.rectangle((x_start, y_start, x_start + width, y_end), outline=0, width=2, fill=200)
 
