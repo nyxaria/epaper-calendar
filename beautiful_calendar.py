@@ -56,7 +56,7 @@ def prepare_grid(d):
         x = offset_left + bar_left + per_day * i
         # for every but the first, draw separator to the left
         if i > 0:
-            d.line([(offset_top, x), (height, x )])
+            d.line([(x, offset_top), (x, height)])
         # draw date headline
         day = ical_worker.basetime + datetime.timedelta(days=i)
         headline = day.strftime('%a, %d')
