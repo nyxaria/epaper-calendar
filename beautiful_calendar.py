@@ -43,12 +43,12 @@ def prepare_grid(d):
     """ Prepares the Days X Hours grid for drawing events into it """
 
     # separate top bar from rest
-    d.line([(offset_left + bar_top - 1, offset_top), (offset_top + bar_top - 1, width)], width=2)
+    d.line([(offset_top + bar_top - 1, offset_top), (offset_top + bar_top - 1, width)], width=2)
 
     # separate all-day events from grid
-    d.line([(offset_top + bar_top + offset_allday, offset_left), (offset_top + bar_top + offset_allday, width)], width=2)
+    # d.line([(offset_left + bar_left + offset_allday, offset_left), (offset_left + bar_left + offset_allday, width)], width=2)
     # separate the left bar from the rest
-    d.line([(offset_top, offset_left + bar_left - 1), (height, offset_left + bar_left - 1,)], width=2)
+    d.line([(offset_left, offset_left + bar_left - 1), (height, offset_left + bar_left - 1,)], width=2)
 
     # draw the vertical day separators and day headlines
     for i in range(0, DAYS):
@@ -61,19 +61,19 @@ def prepare_grid(d):
         headline = day.strftime('%a, %d')
         textsize_x = d.textsize(headline, fheadline)[0]
         textoffs_x = math.floor((per_day - textsize_x) / 2)
-        d.text((offset_top, x + textoffs_x), headline, font=fheadline)
+        d.text((x + textoffs_x, offset_top), headline, font=fheadline)
 
         # draw horizontal hour separators and hour numbers
     for i in range(0, hours_day):
-        y = offset_top + bar_top + offset_allday + per_hour * i
+        x = offset_top + bar_top + offset_allday + per_hour * i
         # for every but the first, draw separator before
         if i > 0:
             # separator = dotted line with every fourth pixel
             for j in range(offset_left, width, 4):
-                d.point([(y, j)])
+                d.point([(x, j)])
         # draw the hour number
         textoffs_y = math.floor((per_hour - text_size) / 2)
-        d.text((y + textoffs_y - 1, offset_left), "%02d" % (BEGIN_DAY + i), font=fheadline)
+        d.text((offset_left, x + textoffs_y - 1), "%02d" % (BEGIN_DAY + i), font=fheadline)
 
     # clear the all-day events space
     d.rectangle((offset_left + bar_left + 1, offset_top + bar_left + 1, width, offset_top + bar_left + offset_allday - 1),
