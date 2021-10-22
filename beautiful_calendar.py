@@ -10,6 +10,16 @@ from PIL import Image, ImageDraw, ImageFont
 import ical_worker
 from config import *
 
+<<<<<<< HEAD
+=======
+#
+# URLS = [
+#     "https://calendar.google.com/calendar/u/2?cid=bWtzcXYwcWpiMmhzbXNyNjRmbmdoZGdkYzRAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ",
+#     "https://calendar.google.com/calendar/u/2?cid=NTUzdDFvMTRpY2lrNWk0Y3V2aHRxcXVtMm9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ",
+#     "https://calendar.google.com/calendar/u/2?cid=cWk3bGdyajN0dmRtdWRiaGhrOXRyc28xam9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ",
+#     "https://calendar.google.com/calendar/u/2?cid=bXJzaHVyc2hpbEBnbWFpbC5jb20"]
+
+>>>>>>> 6b40fd274c605d692dd395875b19c0f5ede4c5fa
 # timezone = pytz.timezone(TIMEZONE)
 # ical_worker.basetime = datetime.datetime.now(timezone)
 # ical_worker.basetime.astimezone(timezone)
@@ -38,45 +48,39 @@ def prepare_grid(d):
     # separate top bar from rest
     d.line([(offset_left, offset_top + bar_top - 1), (width, offset_top + bar_top - 1)], width=2)
 
+    # separate all-day events from grid
+    d.line([(offset_left, offset_top + bar_top + offset_allday), (width, offset_top + bar_top + offset_allday)], width=2)
+    # separate the left bar from the rest
+    d.line([(offset_left + bar_left - 1, offset_top), (offset_left + bar_left - 1, height)], width=2)
 
-URLS = [
-    "https://calendar.google.com/calendar/u/2?cid=bWtzcXYwcWpiMmhzbXNyNjRmbmdoZGdkYzRAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ",
-    "https://calendar.google.com/calendar/u/2?cid=NTUzdDFvMTRpY2lrNWk0Y3V2aHRxcXVtMm9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ",
-    "https://calendar.google.com/calendar/u/2?cid=cWk3bGdyajN0dmRtdWRiaGhrOXRyc28xam9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ",
-    "https://calendar.google.com/calendar/u/2?cid=bXJzaHVyc2hpbEBnbWFpbC5jb20"]
-# separate all-day events from grid
-d.line([(offset_left, offset_top + bar_top + offset_allday), (width, offset_top + bar_top + offset_allday)], width=2)
-# separate the left bar from the rest
-d.line([(offset_left + bar_left - 1, offset_top), (offset_left + bar_left - 1, height)], width=2)
+    # draw the vertical day separators and day headlines
+    for i in range(0, DAYS):
+        x = offset_left + bar_left + per_day * i
+        # for every but the first, draw separator to the left
+        if i > 0:
+            d.line([(x, offset_top), (x, height)])
+        # draw date headline
+        day = ical_worker.basetime + datetime.timedelta(days=i)
+        headline = day.strftime('%a, %d')
+        textsize_x = d.textsize(headline, fheadline)[0]
+        textoffs_x = math.floor((per_day - textsize_x) / 2)
+        d.text((x + textoffs_x, offset_top), headline, font=fheadline)
 
-# draw the vertical day separators and day headlines
-for i in range(0, DAYS):
-    x = offset_left + bar_left + per_day * i
-    # for every but the first, draw separator to the left
-    if i > 0:
-        d.line([(x, offset_top), (x, height)])
-    # draw date headline
-    day = ical_worker.basetime + datetime.timedelta(days=i)
-    headline = day.strftime('%a, %d')
-    textsize_x = d.textsize(headline, fheadline)[0]
-    textoffs_x = math.floor((per_day - textsize_x) / 2)
-    d.text((x + textoffs_x, offset_top), headline, font=fheadline)
+        # draw horizontal hour separators and hour numbers
+    for i in range(0, hours_day):
+        y = offset_top + bar_top + offset_allday + per_hour * i
+        # for every but the first, draw separator before
+        if i > 0:
+            # separator = dotted line with every fourth pixel
+            for j in range(offset_left, width, 4):
+                d.point([(j, y)])
+        # draw the hour number
+        textoffs_y = math.floor((per_hour - text_size) / 2)
+        d.text((offset_left, y + textoffs_y - 1), "%02d" % (BEGIN_DAY + i), font=fheadline)
 
-    # draw horizontal hour separators and hour numbers
-for i in range(0, hours_day):
-    y = offset_top + bar_top + offset_allday + per_hour * i
-    # for every but the first, draw separator before
-    if i > 0:
-        # separator = dotted line with every fourth pixel
-        for j in range(offset_left, width, 4):
-            d.point([(j, y)])
-    # draw the hour number
-    textoffs_y = math.floor((per_hour - text_size) / 2)
-    d.text((offset_left, y + textoffs_y - 1), "%02d" % (BEGIN_DAY + i), font=fheadline)
-
-# clear the all-day events space
-d.rectangle((offset_left + bar_left + 1, offset_top + bar_left + 1, width, offset_top + bar_left + offset_allday - 1),
-            fill=200, width=0)
+    # clear the all-day events space
+    d.rectangle((offset_left + bar_left + 1, offset_top + bar_left + 1, width, offset_top + bar_left + offset_allday - 1),
+                fill=200, width=0)
 
 
 def draw_short_event(d, e):
