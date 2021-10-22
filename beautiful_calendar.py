@@ -91,7 +91,7 @@ def draw_short_event(d, e):
     into several calls of draw_short_event and draw_allday_event.
     
     """
-    x_start = offset_left + bar_left + e["day"] * per_day + e["column"] * per_day / e["max_collision"]
+    x_start = offset_left + 1 + bar_left + e["day"] * per_day + e["column"] * per_day / e["max_collision"]
     y_start = offset_top + bar_top+ offset_allday + math.floor((e["start"] - (BEGIN_DAY * 60)) * per_hour / 60)
     width = per_day / e["max_collision"]
     y_end = offset_top + bar_top + offset_allday + math.floor((e["end"] - (BEGIN_DAY * 60)) * per_hour / 60)
