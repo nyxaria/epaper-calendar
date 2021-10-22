@@ -2,8 +2,9 @@
 import datetime
 import math
 import sys
+from waveshare_epd import epd7in5b_V2
 
-import epd7in5
+#import epd7in5
 from PIL import Image, ImageDraw, ImageFont
 
 import ical_worker
@@ -23,13 +24,14 @@ print("hours_day: {}".format(hours_day))
 def get_drawable_events():
     print("per_hour: {}\t lost: {}".format(per_hour, height - bar_top - offset_top - offset_allday - hours_day * per_hour))
 print("per_day: {}\t lost: {}".format(per_day, width - bar_left - offset_left - per_day * DAYS))
-epd = epd7in5.EPD()
+epd = epd7in5b_V2.EPD()
 
 def prepare_grid(d):
     """ Prepares the Days X Hours grid for drawing events into it """
 
     # separate top bar from rest
     d.line([(offset_left, offset_top + bar_top - 1), (width, offset_top + bar_top - 1)], width=2)
+URLS = ["https://calendar.google.com/calendar/u/2?cid=bWtzcXYwcWpiMmhzbXNyNjRmbmdoZGdkYzRAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ", "https://calendar.google.com/calendar/u/2?cid=NTUzdDFvMTRpY2lrNWk0Y3V2aHRxcXVtMm9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ", "https://calendar.google.com/calendar/u/2?cid=cWk3bGdyajN0dmRtdWRiaGhrOXRyc28xam9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ", "https://calendar.google.com/calendar/u/2?cid=bXJzaHVyc2hpbEBnbWFpbC5jb20"]
     # separate all-day events from grid
     d.line([(offset_left, offset_top + bar_top + offset_allday), (width, offset_top + bar_top + offset_allday)], width=2)
     # separate the left bar from the rest
@@ -134,7 +136,12 @@ def draw_event(d, ev):
 
 if __name__ == "__main__":
     (drawables, all_days) = ical_worker.get_drawable_events()
-    im = Image.new('1', (width, height), 255)
+
+    epd.init()
+
+    im = Image.new('1', (epd.width, epd.height), 255)  # 255: clear the frame
+    Other = Image.new('1', (epd.width, epd.height), 255)  # 255: clear the frame
+    draw_other = ImageDraw.Draw(Other)
     d = ImageDraw.Draw(im)
 
     prepare_grid(d)
@@ -146,7 +153,7 @@ if __name__ == "__main__":
         draw_allday_event(d, e)
     im.save(open("out.jpg", "w+"))
 
+    epd.display(epd.getbuffer(im),epd.getbuffer(Other))
 
-    epd.init() 
-    epd.display(epd.getbuffer(im))
+    #epd.display(epd.getbuffer(Limage), epd.getbuffer(im))
     epd.sleep()

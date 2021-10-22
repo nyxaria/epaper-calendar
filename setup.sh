@@ -1,0 +1,2 @@
+export WAVESHARE_EPD75_VERSION=2
+

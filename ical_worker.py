@@ -151,7 +151,7 @@ def split_events(evs):
 def get_drawable_events():
     all_events = []
     for url in URLS:
-        evs = events(url, start=start, end=end)
+        evs = events(url, start=start, end=end, fix_apple=True)
         all_events.extend(evs)
     print("Got {} events".format(len(all_events)))
     all_events.sort()
