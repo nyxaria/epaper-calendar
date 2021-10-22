@@ -156,8 +156,8 @@ if __name__ == "__main__":
 
     epd.init()
 
-    im = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame
-    Other = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame
+    im = Image.new('1', (epd.width, epd.height), 255)  # 255: clear the frame
+    Other = Image.new('1', (epd.width, epd.height), 255)  # 255: clear the frame
     draw_other = ImageDraw.Draw(Other)
     d = ImageDraw.Draw(im)
 
