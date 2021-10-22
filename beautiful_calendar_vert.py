@@ -170,7 +170,7 @@ if __name__ == "__main__":
         draw_allday_event(d, e)
     im.save(open("out.jpg", "w+"))
 
-    epd.display(epd.getbuffer(im), epd.getbuffer(Other))
+    epd.display(epd.getbuffer(im.rotate(0, expand=True)), epd.getbuffer(Other.rotate(0, expand=True)))
 
     # epd.display(epd.getbuffer(Limage), epd.getbuffer(im))
     epd.sleep()
