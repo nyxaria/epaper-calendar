@@ -10,8 +10,6 @@ from PIL import Image, ImageDraw, ImageFont
 import ical_worker
 from config import *
 
-<<<<<<< HEAD
-=======
 #
 # URLS = [
 #     "https://calendar.google.com/calendar/u/2?cid=bWtzcXYwcWpiMmhzbXNyNjRmbmdoZGdkYzRAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ",
@@ -19,7 +17,6 @@ from config import *
 #     "https://calendar.google.com/calendar/u/2?cid=cWk3bGdyajN0dmRtdWRiaGhrOXRyc28xam9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ",
 #     "https://calendar.google.com/calendar/u/2?cid=bXJzaHVyc2hpbEBnbWFpbC5jb20"]
 
->>>>>>> 6b40fd274c605d692dd395875b19c0f5ede4c5fa
 # timezone = pytz.timezone(TIMEZONE)
 # ical_worker.basetime = datetime.datetime.now(timezone)
 # ical_worker.basetime.astimezone(timezone)
