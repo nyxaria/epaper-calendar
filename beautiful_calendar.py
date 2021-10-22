@@ -22,6 +22,7 @@ from config import *
 # ical_worker.basetime.astimezone(timezone)
 
 fheadline = ImageFont.truetype('/usr/share/fonts/truetype/lato/Lato-Light.ttf', headline_size)
+fhours = ImageFont.truetype('/usr/share/fonts/truetype/lato/Lato-Light.ttf', headline_size-6)
 ftext = ImageFont.truetype('/usr/share/fonts/truetype/lato/Lato-Light.ttf', text_size)
 fbold = ImageFont.truetype('/usr/share/fonts/truetype/lato/Lato-Bold.ttf', text_size)
 # fawesome = ImageFont.truetype('fa-regular.otf', text_size)
@@ -70,14 +71,14 @@ def prepare_grid(d):
         if i > 0:
             # separator = dotted line with every fourth pixel
             for j in range(offset_left, width, 4):
-                d.point([(x, j)])
+                d.point([(j, x)])
         # draw the hour number
         textoffs_y = math.floor((per_hour - text_size) / 2)
-        d.text((offset_left, x + textoffs_y - 1), "%02d" % (BEGIN_DAY + i), font=fheadline)
+        d.text((offset_left, x + textoffs_y - 1), "%02d" % (BEGIN_DAY + i), font=fhours)
 
     # clear the all-day events space
-    d.rectangle((offset_left + bar_left + 1, offset_top + bar_left + 1, width, offset_top + bar_left + offset_allday - 1),
-                fill=200, width=0)
+    # d.rectangle((offset_left + bar_left + 1, offset_top + bar_left + 1, width, offset_top + bar_left + offset_allday - 1),
+    #             fill=200, width=0)
 
 
 def draw_short_event(d, e):
