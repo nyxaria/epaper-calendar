@@ -12,10 +12,10 @@ from config import *
 
 #
 # URLS = [
-#     "https://calendar.google.com/calendar/u/2?cid=bWtzcXYwcWpiMmhzbXNyNjRmbmdoZGdkYzRAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ",
-#     "https://calendar.google.com/calendar/u/2?cid=NTUzdDFvMTRpY2lrNWk0Y3V2aHRxcXVtMm9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ",
-#     "https://calendar.google.com/calendar/u/2?cid=cWk3bGdyajN0dmRtdWRiaGhrOXRyc28xam9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ",
-#     "https://calendar.google.com/calendar/u/2?cid=bXJzaHVyc2hpbEBnbWFpbC5jb20"]
+#     "webcal://calendar.google.com/calendar/u/2?cid=bWtzcXYwcWpiMmhzbXNyNjRmbmdoZGdkYzRAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ",
+#     "webcal://calendar.google.com/calendar/u/2?cid=NTUzdDFvMTRpY2lrNWk0Y3V2aHRxcXVtMm9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ",
+#     "webcal://calendar.google.com/calendar/u/2?cid=cWk3bGdyajN0dmRtdWRiaGhrOXRyc28xam9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ",
+#     "webcal://calendar.google.com/calendar/u/2?cid=bXJzaHVyc2hpbEBnbWFpbC5jb20"]
 
 # timezone = pytz.timezone(TIMEZONE)
 # ical_worker.basetime = datetime.datetime.now(timezone)
@@ -92,10 +92,10 @@ def draw_short_event(d, e):
     
     """
     x_start = offset_left + bar_left + e["day"] * per_day + e["column"] * per_day / e["max_collision"]
-    y_start = offset_top + bar_top+ offset_allday + math.floor((e["start"] - (BEGIN_DAY * 60)) * per_hour / 60)
+    y_start = offset_top + bar_top+ offset_allday + math.floor((e["start"] - 60 - (BEGIN_DAY * 60)) * per_hour / 60)
     # width = per_day / e["max_collision"]
     width = (epd7in5b_V2.EPD_WIDTH - 2 - offset_left - bar_left) / DAYS
-    y_end = offset_top + bar_top + offset_allday + math.floor((e["end"] - (BEGIN_DAY * 60)) * per_hour / 60)
+    y_end = offset_top + bar_top + offset_allday + math.floor((e["end"] - 60 - (BEGIN_DAY * 60)) * per_hour / 60)
     # clear the event's area and make the outline
     d.rectangle((x_start, y_start, x_start + width, y_end), outline=0, width=2, fill=200)
 
@@ -106,8 +106,8 @@ def draw_short_event(d, e):
     while d.textsize(fulltext, font=ftext)[0] > width - 2 * textoffs_x and len(fulltext) > 0:
         fulltext = fulltext[:-1]
     if e["end"] - e["start"] >= 90:
-        begintext = "%02d:%02d" % (e["start"] // 60, e["start"] % 60)
-        endtext = "%02d:%02d" % (e["end"] // 60, e["end"] % 60)
+        begintext = "%02d:%02d" % ((e["start"]-60) // 60, e["start"] % 60)
+        endtext = "%02d:%02d" % ((e["end"]-60) // 60, e["end"] % 60)
         datetext = "\n%s-%s" % (begintext, endtext)
         if d.textsize(datetext, font=ftext)[0] > width - 2 * textoffs_x:
             datetext = "\n%s" % begintext
