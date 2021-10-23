@@ -166,6 +166,13 @@ if __name__ == "__main__":
     now = datetime.datetime.now()
 
     draw_other = ImageDraw.Draw(Other)
+    x_start = offset_left + bar_left
+    y_start = offset_top + bar_top + offset_allday + math.floor((now.minute*60 - (BEGIN_DAY * 60)) * per_hour / 60)
+    width = int(per_day)
+    # width = (epd7in5b_V2.EPD_WIDTH - 3 - offset_left - bar_left) / DAYS
+    # clear the event's area and make the outline
+    draw_other.line((x_start, y_start, x_start + width, y_start), width=3)
+
     x_start = offset_left + bar_left + 0 * per_day + 0 * per_day / 1
     y_start = offset_top + bar_top + offset_allday + math.floor((now.minute - (BEGIN_DAY * 60)) * per_hour / 60)
     # width =
@@ -173,7 +180,7 @@ if __name__ == "__main__":
     # y_end = offset_top + bar_top + offset_allday + math.floor((now.minute - (BEGIN_DAY * 60)) * per_hour / 60)
     # clear the event's area and make the outline
     # draw_other.rectangle((x_start, y_start, x_start + width, y_start), outline=0, width=2, fill=200)
-    draw_other.line([(100,100), (200,200)], width=3)
+    # draw_other.line((100,100, 200,200), width=3)
 
     d = ImageDraw.Draw(im)
 
