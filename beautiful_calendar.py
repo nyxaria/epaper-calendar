@@ -109,10 +109,11 @@ def draw_short_event(d, e):
         begintext = "%02d:%02d" % ((e["start"]-60) // 60, e["start"] % 60)
         endtext = "%02d:%02d" % ((e["end"]-60) // 60, e["end"] % 60)
         datetext = "\n%s-%s" % (begintext, endtext)
+
         if d.textsize(datetext, font=ftext)[0] > width - 2 * textoffs_x:
             datetext = "\n%s" % begintext
-        if d.textsize(datetext, font=ftext)[0] <= width - 2 * textoffs_x:
-            fulltext += datetext
+        # if d.textsize(datetext, font=ftext)[0] <= width - 2 * textoffs_x:
+        fulltext += datetext
     d.text((x_start + textoffs_x, y_start + textoffs_y), fulltext, font=ftext)
     print(fulltext)
     # d.text((x_start + 5, y_start + text_size + textoffs_y), begintext + "-" + endtext, font=ftext)
@@ -167,7 +168,7 @@ if __name__ == "__main__":
 
     draw_other = ImageDraw.Draw(Other)
     x_start = offset_left + bar_left
-    y_start = offset_top + bar_top + offset_allday + math.floor((now.minute*60 - (BEGIN_DAY * 60)) * per_hour / 60)
+    y_start = offset_top + bar_top + offset_allday + math.floor((now.minute+now.hour*60 - (BEGIN_DAY * 60)) * per_hour / 60)
     width = int(per_day)
     # width = (epd7in5b_V2.EPD_WIDTH - 3 - offset_left - bar_left) / DAYS
     # clear the event's area and make the outline
