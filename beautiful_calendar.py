@@ -70,7 +70,7 @@ def prepare_grid(d):
         # for every but the first, draw separator before
         if i > 0:
             # separator = dotted line with every fourth pixel
-            for j in range(offset_left, width, 4):
+            for j in range(offset_left, width*2, 4):
                 d.point([(j, x)])
         # draw the hour number
         textoffs_y = math.floor((per_hour - text_size) / 2)
