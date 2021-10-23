@@ -49,7 +49,7 @@ def prepare_grid(d):
 
     now = datetime.datetime.now()
 
-    d.line([(offset_top + bar_left - 1, offset_left + 23), (offset_left + bar_left - 1, epd7in5b_V2.EPD_WIDTH*2)], width=2)
+    d.line([(offset_left + bar_left - 1, offset_left + 23), (offset_left + bar_left - 1, epd7in5b_V2.EPD_WIDTH*2)], width=2)
 
     # separate all-day events from grid
     # d.line([(offset_left + bar_left + offset_allday, offset_left), (offset_left + bar_left + offset_allday, width)], width=2)
