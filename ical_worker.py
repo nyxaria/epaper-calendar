@@ -157,9 +157,11 @@ def get_drawable_events():
             else:
                 evs = events(url, start=start, end=end)
             all_events.extend(evs)
+            print("Loaded ", url)
         except Exception as e:
             print("Failed to load ", url)
             print(e)
+
     print("Got {} events".format(len(all_events)))
     all_events.sort()
     (drawables, all_days) = split_events(all_events)
