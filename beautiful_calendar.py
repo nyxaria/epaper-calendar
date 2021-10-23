@@ -94,7 +94,7 @@ def draw_short_event(d, e):
     x_start = offset_left + bar_left + e["day"] * per_day + e["column"] * per_day / e["max_collision"]
     y_start = offset_top + bar_top+ offset_allday + math.floor((e["start"] - (BEGIN_DAY * 60)) * per_hour / 60)
     # width = per_day / e["max_collision"]
-    width = (epd7in5b_V2.EPD_WIDTH - 2 - offset_left - bar_left) / DAYS
+    width = (epd7in5b_V2.EPD_WIDTH - 3 - offset_left - bar_left) / DAYS
     y_end = offset_top + bar_top + offset_allday + math.floor((e["end"] - (BEGIN_DAY * 60)) * per_hour / 60)
     # clear the event's area and make the outline
     d.rectangle((x_start, y_start, x_start + width, y_end), outline=0, width=2, fill=200)
@@ -161,7 +161,20 @@ if __name__ == "__main__":
 
     im = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame
     Other = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame
+    import datetime
+
+    now = datetime.datetime.now()
+
     draw_other = ImageDraw.Draw(Other)
+    x_start = offset_left + bar_left + 0 * per_day + 0 * per_day / 1
+    y_start = offset_top + bar_top + offset_allday + math.floor((now.minute - (BEGIN_DAY * 60)) * per_hour / 60)
+    # width = per_day / e["max_collision"]
+    width = (epd7in5b_V2.EPD_WIDTH - 3 - offset_left - bar_left) / DAYS
+    # y_end = offset_top + bar_top + offset_allday + math.floor((now.minute - (BEGIN_DAY * 60)) * per_hour / 60)
+    # clear the event's area and make the outline
+    draw_other.rectangle((x_start, y_start, x_start + width, y_start), outline=0, width=2, fill=200)
+
+
     d = ImageDraw.Draw(im)
 
     prepare_grid(d)
