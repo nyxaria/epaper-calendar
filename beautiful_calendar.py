@@ -173,7 +173,7 @@ if __name__ == "__main__":
     # y_end = offset_top + bar_top + offset_allday + math.floor((now.minute - (BEGIN_DAY * 60)) * per_hour / 60)
     # clear the event's area and make the outline
     # draw_other.rectangle((x_start, y_start, x_start + width, y_start), outline=0, width=2, fill=200)
-    draw_other.line([(x_start, y_start), (x_start + per_day / 1, y_start)], width=2)
+    draw_other.line([(100,100), (200,200)], width=3)
 
     d = ImageDraw.Draw(im)
 
