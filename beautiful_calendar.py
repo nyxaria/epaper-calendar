@@ -157,8 +157,10 @@ def draw_event(d, ev):
 
 if __name__ == "__main__":
     (drawables, all_days) = ical_worker.get_drawable_events()
+    print("GOT ALL EVENTS")
 
     epd.init()
+    print("DONE INIT, DRAWING")
 
     im = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame
     Other = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame
@@ -189,6 +191,6 @@ if __name__ == "__main__":
     im.save(open("out.jpg", "w+"))
 
     epd.display(epd.getbuffer(im), epd.getbuffer(Other))
-
+    print("DONE DRAWING")
     # epd.display(epd.getbuffer(Limage), epd.getbuffer(im))
     epd.sleep()
