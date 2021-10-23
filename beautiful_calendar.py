@@ -49,7 +49,7 @@ def prepare_grid(d):
     # separate all-day events from grid
     # d.line([(offset_left + bar_left + offset_allday, offset_left), (offset_left + bar_left + offset_allday, width)], width=2)
     # separate the left bar from the rest
-    d.line([(offset_left, offset_top + bar_top - 1), (height*2, offset_top + bar_top - 1,)], width=2)
+    d.line([(offset_left, offset_top + bar_top - 1), (epd7in5b_V2.EPD_WIDTH*2, offset_top + bar_top - 1,)], width=2)
 
     # draw the vertical day separators and day headlines
     for i in range(0, DAYS):
