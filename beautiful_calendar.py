@@ -49,7 +49,7 @@ def prepare_grid(d):
 
     now = datetime.datetime.now()
 
-    d.text((offset_top, offset_left), now.hour + ":" + now.minute, font=ftext)
+    d.text((offset_top, offset_left), str(now.hour) + ":" + str(now.minute), font=ftext)
 
     d.line([(offset_top + bar_left - 1, offset_left + 20), (offset_left + bar_left - 1, epd7in5b_V2.EPD_WIDTH*2)], width=2)
 
