@@ -81,7 +81,7 @@ def prepare_grid(d):
         textoffs_y = math.floor((per_hour - text_size) / 2)
         d.text((offset_left, x + textoffs_y - 1), "%02d" % (BEGIN_DAY + i), font=fhours)
 
-    d.text((offset_top, offset_left), ("0" if now.hour < 10 else "") + str(now.hour) + ":" +
+    d.text((offset_left, offset_top), ("0" if now.hour < 10 else "") + str(now.hour) + ":" +
            ("0" if now.minute < 10 else "") + str(now.minute), font=ftext)
 
     # clear the all-day events space
