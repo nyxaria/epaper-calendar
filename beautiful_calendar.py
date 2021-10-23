@@ -49,10 +49,7 @@ def prepare_grid(d):
 
     now = datetime.datetime.now()
 
-    d.text((offset_top, offset_left), ("0" if now.hour < 10 else "") + str(now.hour) + ":" +
-           ("0" if now.minute < 10 else "") + str(now.minute), font=ftext)
-
-    d.line([(offset_top + bar_left - 1, offset_left + 20), (offset_left + bar_left - 1, epd7in5b_V2.EPD_WIDTH*2)], width=2)
+    d.line([(offset_top + bar_left - 1, offset_left + 23), (offset_left + bar_left - 1, epd7in5b_V2.EPD_WIDTH*2)], width=2)
 
     # separate all-day events from grid
     # d.line([(offset_left + bar_left + offset_allday, offset_left), (offset_left + bar_left + offset_allday, width)], width=2)
@@ -83,6 +80,9 @@ def prepare_grid(d):
         # draw the hour number
         textoffs_y = math.floor((per_hour - text_size) / 2)
         d.text((offset_left, x + textoffs_y - 1), "%02d" % (BEGIN_DAY + i), font=fhours)
+
+    d.text((offset_top, offset_left), ("0" if now.hour < 10 else "") + str(now.hour) + ":" +
+           ("0" if now.minute < 10 else "") + str(now.minute), font=ftext)
 
     # clear the all-day events space
     # d.rectangle((offset_left + bar_left + 1, offset_top + bar_left + 1, width, offset_top + bar_left + offset_allday - 1),
