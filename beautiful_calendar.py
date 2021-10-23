@@ -49,14 +49,14 @@ def prepare_grid(d):
     # separate all-day events from grid
     # d.line([(offset_left + bar_left + offset_allday, offset_left), (offset_left + bar_left + offset_allday, width)], width=2)
     # separate the left bar from the rest
-    d.line([(offset_left, offset_top + bar_top - 1), (height, offset_top + bar_top - 1,)], width=2)
+    d.line([(offset_left, offset_top + bar_top - 1), (height*2, offset_top + bar_top - 1,)], width=2)
 
     # draw the vertical day separators and day headlines
     for i in range(0, DAYS):
         x = offset_left + bar_left + per_day * i
         # for every but the first, draw separator to the left
         if i > 0:
-            d.line([(x, offset_top), (x, height)])
+            d.line([(x, offset_top), (x, height*3)])
         # draw date headline
         day = ical_worker.basetime + datetime.timedelta(days=i)
         headline = day.strftime('%a, %d')
@@ -70,7 +70,7 @@ def prepare_grid(d):
         # for every but the first, draw separator before
         if i > 0:
             # separator = dotted line with every fourth pixel
-            for j in range(offset_left, width*2, 4):
+            for j in range(offset_left, width*3, 4):
                 d.point([(j, x)])
         # draw the hour number
         textoffs_y = math.floor((per_hour - text_size) / 2)
