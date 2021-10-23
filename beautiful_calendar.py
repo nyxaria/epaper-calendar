@@ -49,7 +49,8 @@ def prepare_grid(d):
 
     now = datetime.datetime.now()
 
-    d.text((offset_top, offset_left), "0" if now.hour < 10 else "" + str(now.hour) + ":" + "0" if now.minute < 10 else "" +  str(now.minute), font=ftext)
+    d.text((offset_top, offset_left), ("0" if now.hour < 10 else "") + str(now.hour) + ":" +
+           ("0" if now.minute < 10 else "") + str(now.minute), font=ftext)
 
     d.line([(offset_top + bar_left - 1, offset_left + 20), (offset_left + bar_left - 1, epd7in5b_V2.EPD_WIDTH*2)], width=2)
 
