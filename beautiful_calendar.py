@@ -172,18 +172,18 @@ if __name__ == "__main__":
     width = int(per_day)
     # width = (epd7in5b_V2.EPD_WIDTH - 3 - offset_left - bar_left) / DAYS
     # clear the event's area and make the outline
-    # draw_other.line((x_start, y_start, x_start + width, y_start), width=3)
+    draw_other.line((x_start, y_start, x_start + width, y_start), width=3)
 
 
     d = ImageDraw.Draw(im)
 
     prepare_grid(d)
     # draw_event(d, evs[1])
-    # for l in drawables:
-    #     for e in l:
-    #         draw_short_event(d, e)
-    # for e in all_days:
-    #     draw_allday_event(d, e)
+    for l in drawables:
+        for e in l:
+            draw_short_event(d, e)
+    for e in all_days:
+        draw_allday_event(d, e)
     im.save(open("out.jpg", "w+"))
 
     epd.display(epd.getbuffer(im), epd.getbuffer(Other))
