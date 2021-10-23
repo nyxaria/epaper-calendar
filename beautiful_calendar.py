@@ -49,7 +49,7 @@ def prepare_grid(d):
 
     now = datetime.datetime.now()
 
-    d.line([(offset_left + bar_left - 1, offset_left + 29), (offset_left + bar_left - 1, epd7in5b_V2.EPD_WIDTH*2)], width=2)
+    d.line([(offset_left + bar_left - 1, offset_left + 31), (offset_left + bar_left - 1, epd7in5b_V2.EPD_WIDTH*2)], width=2)
 
     # separate all-day events from grid
     # d.line([(offset_left + bar_left + offset_allday, offset_left), (offset_left + bar_left + offset_allday, width)], width=2)
@@ -64,7 +64,7 @@ def prepare_grid(d):
             d.line([(x, offset_top), (x, height*3)])
         # draw date headline
         day = ical_worker.basetime + datetime.timedelta(days=i)
-        headline = day.strftime('%a, %d')
+        headline = day.strftime('%a %d')
         textsize_x = d.textsize(headline, fheadline)[0]
         textoffs_x = math.floor((per_day - textsize_x) / 2)
         d.text((x + textoffs_x, offset_top), headline, font=fheadline)
