@@ -105,7 +105,7 @@ def draw_short_event(d, e):
     fulltext = e["title"]
     while d.textsize(fulltext, font=ftext)[0] > width - 2 * textoffs_x and len(fulltext) > 0:
         fulltext = fulltext[:-1]
-    if e["end"] - e["start"] >= 90:
+    if e["end"] - e["start"] >= 60:
         begintext = "%02d:%02d" % ((e["start"]-60) // 60, e["start"] % 60)
         endtext = "%02d:%02d" % ((e["end"]-60) // 60, e["end"] % 60)
         datetext = "\n%s-%s" % (begintext, endtext)
@@ -168,20 +168,12 @@ if __name__ == "__main__":
 
     draw_other = ImageDraw.Draw(Other)
     x_start = offset_left + bar_left
-    y_start = offset_top + bar_top + offset_allday + math.floor((now.minute+now.hour*60 - (BEGIN_DAY * 60)) * per_hour / 60)
+    y_start = offset_top + bar_top + offset_allday + math.floor((now.minute+now.hour*60+60 - (BEGIN_DAY * 60)) * per_hour / 60)
     width = int(per_day)
     # width = (epd7in5b_V2.EPD_WIDTH - 3 - offset_left - bar_left) / DAYS
     # clear the event's area and make the outline
-    draw_other.line((x_start, y_start, x_start + width, y_start), width=3)
+    # draw_other.line((x_start, y_start, x_start + width, y_start), width=3)
 
-    x_start = offset_left + bar_left + 0 * per_day + 0 * per_day / 1
-    y_start = offset_top + bar_top + offset_allday + math.floor((now.minute - (BEGIN_DAY * 60)) * per_hour / 60)
-    # width =
-    # width = (epd7in5b_V2.EPD_WIDTH - 3 - offset_left - bar_left) / DAYS
-    # y_end = offset_top + bar_top + offset_allday + math.floor((now.minute - (BEGIN_DAY * 60)) * per_hour / 60)
-    # clear the event's area and make the outline
-    # draw_other.rectangle((x_start, y_start, x_start + width, y_start), outline=0, width=2, fill=200)
-    # draw_other.line((100,100, 200,200), width=3)
 
     d = ImageDraw.Draw(im)
 
