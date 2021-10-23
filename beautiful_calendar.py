@@ -172,6 +172,9 @@ if __name__ == "__main__":
     width = int(per_day)
     # width = (epd7in5b_V2.EPD_WIDTH - 3 - offset_left - bar_left) / DAYS
     # clear the event's area and make the outline
+    r = 10
+    draw_other.arc((x_start - r, y_start - r, x_start + r, y_start + r), 0, 360, fill=200)
+
     draw_other.line((x_start, y_start, x_start + width, y_start), width=4)
 
     d = ImageDraw.Draw(im)
