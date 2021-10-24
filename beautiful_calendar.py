@@ -115,7 +115,7 @@ def draw_short_event(d, e, other):
     y_end = offset_top + bar_top + offset_allday + math.floor((e["end"] - (BEGIN_DAY * 60)) * per_hour / 60)
     # clear the event's area and make the outline
     s = e["title"].lower()
-    RED = False
+    RED = True
     truth = [x in s for x in keywords]
     if True in truth:
         if not RED:
