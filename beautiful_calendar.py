@@ -140,7 +140,7 @@ def draw_short_event(d, e, other):
             datetext = "\n%s" % begintext
         # if d.textsize(datetext, font=ftext)[0] <= width - 2 * textoffs_x:
         fulltext += datetext
-    if not RED:
+    if not RED and True in truth:
         d.text((x_start + textoffs_x, y_start + textoffs_y), fulltext, font=fbold)
     else:
         d.text((x_start + textoffs_x, y_start + textoffs_y), fulltext, font=ftext)
