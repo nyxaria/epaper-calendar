@@ -115,10 +115,13 @@ def draw_short_event(d, e, other):
     y_end = offset_top + bar_top + offset_allday + math.floor((e["end"] - (BEGIN_DAY * 60)) * per_hour / 60)
     # clear the event's area and make the outline
     s = e["title"].lower()
-    keywords = ["supo", "sally", "assert", "study", "attention"]
+    RED = False
     truth = [x in s for x in keywords]
     if True in truth:
-        other.rectangle((x_start, y_start, x_start + width, y_end), outline=0, width=2, fill=200)
+        if not RED:
+            d.rectangle((x_start, y_start, x_start + width, y_end), outline=0, width=2, fill=200)
+        else:
+            other.rectangle((x_start, y_start, x_start + width, y_end), outline=0, width=2, fill=200)
     else:
         d.rectangle((x_start, y_start, x_start + width, y_end), outline=0, width=2, fill=200)
 
@@ -137,7 +140,11 @@ def draw_short_event(d, e, other):
             datetext = "\n%s" % begintext
         # if d.textsize(datetext, font=ftext)[0] <= width - 2 * textoffs_x:
         fulltext += datetext
-    d.text((x_start + textoffs_x, y_start + textoffs_y), fulltext, font=ftext)
+    if not RED:
+        d.text((x_start + textoffs_x, y_start + textoffs_y), fulltext, font=fbold)
+    else:
+        d.text((x_start + textoffs_x, y_start + textoffs_y), fulltext, font=ftext)
+
     print(fulltext)
     # d.text((x_start + 5, y_start + text_size + textoffs_y), begintext + "-" + endtext, font=ftext)
 
