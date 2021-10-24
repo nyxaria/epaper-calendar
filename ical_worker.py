@@ -158,6 +158,7 @@ def get_drawable_events():
                 evs = events(url, start=start, end=end)
             all_events.extend(evs)
             print("Loaded ", url)
+            print(evs)
         except Exception as e:
             print("Failed to load ", url)
             print(e)
