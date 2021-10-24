@@ -114,7 +114,8 @@ def draw_short_event(d, e, other):
     # width = (epd7in5b_V2.EPD_WIDTH - 3 - offset_left - bar_left) / DAYS
     y_end = offset_top + bar_top + offset_allday + math.floor((e["end"] - (BEGIN_DAY * 60)) * per_hour / 60)
     # clear the event's area and make the outline
-    if "supo" in e.summary.lower():
+    s = e.summary.lower()
+    if "supo" in s or "sally" in s or "assertiveness" in s or "study group" in s or "attention" in s:
         other.rectangle((x_start, y_start, x_start + width, y_end), outline=0, width=2, fill=200)
     else:
         d.rectangle((x_start, y_start, x_start + width, y_end), outline=0, width=2, fill=200)
