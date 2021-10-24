@@ -40,7 +40,7 @@ print("per_day: {}\t lost: {}".format(per_day, width - bar_left - offset_left - 
 epd = epd7in5b_V2.EPD()
 
 
-def prepare_grid(d):
+def prepare_grid(d, other):
     """ Prepares the Days X Hours grid for drawing events into it """
 
     # separate top bar from rest
@@ -98,7 +98,7 @@ def prepare_grid(d):
     #             fill=200, width=0)
 
 
-def draw_short_event(d, e):
+def draw_short_event(d, e, other):
     """
     Internal function for drawing events into the grid.
     
@@ -114,7 +114,10 @@ def draw_short_event(d, e):
     # width = (epd7in5b_V2.EPD_WIDTH - 3 - offset_left - bar_left) / DAYS
     y_end = offset_top + bar_top + offset_allday + math.floor((e["end"] - (BEGIN_DAY * 60)) * per_hour / 60)
     # clear the event's area and make the outline
-    d.rectangle((x_start, y_start, x_start + width, y_end), outline=0, width=2, fill=200)
+    if "supo" in e.summary.lower():
+        other.rectangle((x_start, y_start, x_start + width, y_end), outline=0, width=2, fill=200)
+    else:
+        d.rectangle((x_start, y_start, x_start + width, y_end), outline=0, width=2, fill=200)
 
     textoffs_y = 5
     textoffs_x = (per_hour - text_size) // 2 - 1
@@ -197,11 +200,11 @@ if __name__ == "__main__":
     draw_other.line((x_start, y_start, x_start + width, y_start), width=4)
 
     d = ImageDraw.Draw(im)
-    prepare_grid(d)
+    prepare_grid(d, draw_other)
     # draw_event(d, evs[1])
     for l in drawables:
         for e in l:
-            draw_short_event(d, e)
+            draw_short_event(d, e, other)
     for e in all_days:
         draw_allday_event(d, e)
     im.save(open("out.jpg", "w+"))

@@ -1,0 +1,8 @@
+in icalparser.py, line 381: 
+  if exdate not in exceptions:
+      found.append(e)
+
+change to:
+  # if exdate not in exceptions:
+  found.append(e)
+
