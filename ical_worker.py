@@ -153,7 +153,7 @@ def get_drawable_events():
     for url in URLS:
         try:
             if "icloud.com" in url:
-                evs = events(url, start=start, end=end)
+                evs = events(url, start=start, end=end, fix_apple=True)
             else:
                 evs = events(url, start=start, end=end)
             all_events.extend(evs)
