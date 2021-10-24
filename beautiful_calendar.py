@@ -115,7 +115,9 @@ def draw_short_event(d, e, other):
     y_end = offset_top + bar_top + offset_allday + math.floor((e["end"] - (BEGIN_DAY * 60)) * per_hour / 60)
     # clear the event's area and make the outline
     s = e["title"].lower()
-    if "supo" in s or "sally" in s or "assert" in s or "study" in s or "attention" in s:
+    keywords = ["supo", "sally", "assert", "study", "attention"]
+    truth = [x in s for x in keywords]
+    if True in truth:
         other.rectangle((x_start, y_start, x_start + width, y_end), outline=0, width=2, fill=200)
     else:
         d.rectangle((x_start, y_start, x_start + width, y_end), outline=0, width=2, fill=200)
