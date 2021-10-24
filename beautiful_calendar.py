@@ -204,7 +204,7 @@ if __name__ == "__main__":
     # draw_event(d, evs[1])
     for l in drawables:
         for e in l:
-            draw_short_event(d, e, other)
+            draw_short_event(d, e, draw_other)
     for e in all_days:
         draw_allday_event(d, e)
     im.save(open("out.jpg", "w+"))
