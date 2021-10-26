@@ -224,12 +224,12 @@ if __name__ == "__main__":
     prepare_grid(d, draw_other)
     # draw_event(d, evs[1])
     no_dupl = []
-    for d in drawables:
-        truth = [str(d) == str(x) for x in no_dupl]
+    for yy in drawables:
+        truth = [str(yy) == str(x) for x in no_dupl]
         if True in truth:
-            print("found duplicate", d, "not adding!")
+            print("found duplicate", yy, "not adding!")
         else:
-            no_dupl.append(d)
+            no_dupl.append(yy)
     for l in no_dupl:
         for e in l:
             draw_short_event(d, e, draw_other)
