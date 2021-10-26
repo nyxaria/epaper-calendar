@@ -225,6 +225,7 @@ if __name__ == "__main__":
     # draw_event(d, evs[1])
     no_dupl = []
     for yy in drawables:
+        print(str(yy))
         truth = [str(yy) == str(x) for x in no_dupl]
         if True in truth:
             print("found duplicate", yy, "not adding!")
