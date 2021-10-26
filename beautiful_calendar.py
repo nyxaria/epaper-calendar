@@ -208,8 +208,8 @@ if __name__ == "__main__":
     # width = (epd7in5b_V2.EPD_WIDTH - 3 - offset_left - bar_left) / DAYS
     # clear the event's area and make the outline
     r = 7
-    timezone = pytz.timezone(TIMEZONE)
-    basetime = datetime.datetime.now(timezone)
+    # timezone = pytz.timezone(TIMEZONE)
+    # basetime = datetime.datetime.now(timezone)
     # print(datetime.datetime.now(timezone).day , basetime.replace(hour=BEGIN_DAY).day)
     # if datetime.datetime.now(timezone).day != basetime.replace(hour=BEGIN_DAY, minute=0).day:
     #     print("NOT SAME DATE")
@@ -223,6 +223,7 @@ if __name__ == "__main__":
     d = ImageDraw.Draw(im)
     prepare_grid(d, draw_other)
     # draw_event(d, evs[1])
+    drawables = list(set(drawables))
     for l in drawables:
         for e in l:
             draw_short_event(d, e, draw_other)
