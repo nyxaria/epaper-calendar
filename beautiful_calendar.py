@@ -2,6 +2,9 @@
 import datetime
 import math
 import sys
+
+import pytz
+
 from waveshare_epd import epd7in5b_V2
 
 # import epd7in5
@@ -205,9 +208,12 @@ if __name__ == "__main__":
     # width = (epd7in5b_V2.EPD_WIDTH - 3 - offset_left - bar_left) / DAYS
     # clear the event's area and make the outline
     r = 7
-    draw_other.ellipse((x_start - r, y_start - r, x_start + r, y_start + r), width=10)
+    timezone = pytz.timezone(TIMEZONE)
+    basetime = datetime.datetime.now(timezone)
+    if datetime.datetime.now(timezone).day == basetime.replace(hour=BEGIN_DAY, minute=0).day:
+        draw_other.ellipse((x_start - r, y_start - r, x_start + r, y_start + r), width=10)
 
-    draw_other.line((x_start, y_start, x_start + width, y_start), width=4)
+        draw_other.line((x_start, y_start, x_start + width, y_start), width=4)
 
     d = ImageDraw.Draw(im)
     prepare_grid(d, draw_other)
