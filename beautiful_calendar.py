@@ -210,9 +210,10 @@ if __name__ == "__main__":
     r = 7
     timezone = pytz.timezone(TIMEZONE)
     basetime = datetime.datetime.now(timezone)
-    if datetime.datetime.now(timezone).day != basetime.replace(hour=BEGIN_DAY, minute=0).day:
-        print("NOT SAME DATE")
-        y_start = offset_top + bar_top
+    # print(datetime.datetime.now(timezone).day , basetime.replace(hour=BEGIN_DAY).day)
+    # if datetime.datetime.now(timezone).day != basetime.replace(hour=BEGIN_DAY, minute=0).day:
+    #     print("NOT SAME DATE")
+    #     y_start = offset_top + bar_top
 
     draw_other.ellipse((x_start - r, y_start - r, x_start + r, y_start + r), width=10)
 
