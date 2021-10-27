@@ -242,6 +242,7 @@ if __name__ == "__main__":
 
     print("DRawables BEFORE", drawables)
     drawables = [[i for n, i in enumerate(d_) if i not in d_[n + 1:]] for d_ in drawables]
+    drawables = [i for n, i in enumerate(drawables) if i not in drawables[n + 1:]]
     print("DRawables AFTER", drawables)
 
     for l in drawables:
