@@ -215,25 +215,20 @@ if __name__ == "__main__":
     #     print("NOT SAME DATE")
     #     y_start = offset_top + bar_top
 
-    draw_other.ellipse((x_start - r, y_start - r, x_start + r, y_start + r), width=10)
-
-    draw_other.line((x_start, y_start, x_start + width, y_start), width=4)
-
 
     d = ImageDraw.Draw(im)
     prepare_grid(d, draw_other)
     # draw_event(d, evs[1])
-    # no_dupl = []
-    # idx = 0
-    #
-    # for yy in drawables:
-    #     no_dupl[idx] = []
+    no_dupl = []
+
+    # for idx, yy in enumerate(drawables):
+    #     no_dupl.append([])
     #     for ll in yy:
     #         print(str(ll))
     #         if len(no_dupl[idx]) == 0:
     #             no_dupl.append(ll)
     #         else:
-    #             truth = [str(ll) == str(x) for x in no_dupl[idx]]
+    #             truth = [ll["title"] == x["title"] and ll["start"] == x["start"] and  for x in no_dupl[idx]]
     #             if True in truth:
     #                 print("found duplicate", ll, "not adding!")
     #             else:
@@ -251,6 +246,10 @@ if __name__ == "__main__":
     for e in all_days:
         draw_allday_event(d, e)
     im.save(open("out.jpg", "w+"))
+
+    draw_other.ellipse((x_start - r, y_start - r, x_start + r, y_start + r), width=10)
+
+    draw_other.line((x_start, y_start, x_start + width, y_start), width=4)
 
     epd.display(epd.getbuffer(im), epd.getbuffer(Other))
     print("DONE DRAWING")
