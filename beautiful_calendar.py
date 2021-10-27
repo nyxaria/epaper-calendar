@@ -240,9 +240,9 @@ if __name__ == "__main__":
     #                 no_dupl[idx].append(ll)
     #     idx += 1
 
-    drawables = [list(set(x)) for x in drawables]
+    drawables = [[i for n, i in enumerate(d_) if i not in d_[n + 1:]] for d_ in drawables]
 
-    for l in no_dupl:
+    for l in drawables:
         for e in l:
             draw_short_event(d, e, draw_other)
     for e in all_days:
