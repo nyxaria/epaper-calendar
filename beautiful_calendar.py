@@ -223,22 +223,24 @@ if __name__ == "__main__":
     d = ImageDraw.Draw(im)
     prepare_grid(d, draw_other)
     # draw_event(d, evs[1])
-    no_dupl = []
-    idx = 0
+    # no_dupl = []
+    # idx = 0
+    #
+    # for yy in drawables:
+    #     no_dupl[idx] = []
+    #     for ll in yy:
+    #         print(str(ll))
+    #         if len(no_dupl[idx]) == 0:
+    #             no_dupl.append(ll)
+    #         else:
+    #             truth = [str(ll) == str(x) for x in no_dupl[idx]]
+    #             if True in truth:
+    #                 print("found duplicate", ll, "not adding!")
+    #             else:
+    #                 no_dupl[idx].append(ll)
+    #     idx += 1
 
-    for yy in drawables:
-        no_dupl[idx] = []
-        for ll in yy:
-            print(str(ll))
-            if len(no_dupl[idx]) == 0:
-                no_dupl.append(ll)
-            else:
-                truth = [str(ll) == str(x) for x in no_dupl[idx]]
-                if True in truth:
-                    print("found duplicate", ll, "not adding!")
-                else:
-                    no_dupl[idx].append(ll)
-        idx += 1
+    drawables = [list(set(x)) for x in drawables]
 
     for l in no_dupl:
         for e in l:
