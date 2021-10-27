@@ -228,11 +228,14 @@ if __name__ == "__main__":
         idx = 0
         for ll in yy:
             print(str(ll))
-            truth = [str(ll) == str(x) for x in no_dupl[idx]]
-            if True in truth:
-                print("found duplicate", ll, "not adding!")
+            if len(no_dupl[idx]) == 0:
+                no_dupl.append(ll)
             else:
-                no_dupl[idx].append(ll)
+                truth = [str(ll) == str(x) for x in no_dupl[idx]]
+                if True in truth:
+                    print("found duplicate", ll, "not adding!")
+                else:
+                    no_dupl[idx].append(ll)
             idx += 1
     for l in no_dupl:
         for e in l:
