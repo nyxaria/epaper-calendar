@@ -240,7 +240,9 @@ if __name__ == "__main__":
     #                 no_dupl[idx].append(ll)
     #     idx += 1
 
+    print("DRawables BEFORE", drawables)
     drawables = [[i for n, i in enumerate(d_) if i not in d_[n + 1:]] for d_ in drawables]
+    print("DRawables AFTER", drawables)
 
     for l in drawables:
         for e in l:
