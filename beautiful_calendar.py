@@ -224,8 +224,11 @@ if __name__ == "__main__":
     prepare_grid(d, draw_other)
     # draw_event(d, evs[1])
     no_dupl = []
+    idx = 0
+
     for yy in drawables:
-        idx = 0
+        idx += 1
+        no_dupl[idx] = []
         for ll in yy:
             print(str(ll))
             if len(no_dupl[idx]) == 0:
@@ -236,7 +239,6 @@ if __name__ == "__main__":
                     print("found duplicate", ll, "not adding!")
                 else:
                     no_dupl[idx].append(ll)
-        idx += 1
     for l in no_dupl:
         for e in l:
             draw_short_event(d, e, draw_other)
