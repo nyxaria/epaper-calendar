@@ -225,12 +225,15 @@ if __name__ == "__main__":
     # draw_event(d, evs[1])
     no_dupl = []
     for yy in drawables:
-        print(str(yy))
-        truth = [str(yy) == str(x) for x in no_dupl]
-        if True in truth:
-            print("found duplicate", yy, "not adding!")
-        else:
-            no_dupl.append(yy)
+        idx = 0
+        for ll in yy:
+            print(str(ll))
+            truth = [str(ll) == str(x) for x in no_dupl[idx]]
+            if True in truth:
+                print("found duplicate", ll, "not adding!")
+            else:
+                no_dupl[idx].append(ll)
+            idx += 1
     for l in no_dupl:
         for e in l:
             draw_short_event(d, e, draw_other)
