@@ -236,7 +236,7 @@ if __name__ == "__main__":
                     print("found duplicate", ll, "not adding!")
                 else:
                     no_dupl[idx].append(ll)
-            idx += 1
+        idx += 1
     for l in no_dupl:
         for e in l:
             draw_short_event(d, e, draw_other)
