@@ -163,6 +163,7 @@ def draw_short_event(d, e, other):
             if d_h <= 0:
                 print("d_h <= 0")
                 if -d_m < 0:
+                    print("PAST", 60 - e["start"] % 60, dt.minute)
                     d_m = (60 - e["start"] % 60) + dt.minute
                     # datetext_dur = " ({}mins)".format(-d_m)
                 else:
