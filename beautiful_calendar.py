@@ -157,14 +157,13 @@ def draw_short_event(d, e, other):
                 datetext = "\n%s" % begintext
 
                 if "%02d:%02d" % (dt.hour-1, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour, dt.minute) and e["day"] == 0:
-                    # in an hour
                     print('last  hour')
                     datetext += " (-{}mins)".format(60-abs(d_m))
 
                 elif "%02d:%02d" % (dt.hour, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour+1, dt.minute) and e["day"] == 0:
                     # in an hour
                     print('in an hour')
-                    datetext += " ({}mins)".format(-d_m)
+                    datetext += " ({}mins)".format(d_m)
                 elif begintext >= "%02d:%02d" % (dt.hour+1, dt.minute) and e["day"] == 0:
                     print("over an hour", d_h)
                     datetext += datetext_dur
