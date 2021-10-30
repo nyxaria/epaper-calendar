@@ -189,7 +189,7 @@ def draw_short_event(d, e, other):
                         print('in an hour')
                         datetext += " ({}mins)".format(-d_m)
                 else:
-                    print("too small")
+                    print("too small, more than 2 collisions")
                     datetext = "\n%s" % begintext
         elif d.textsize(datetext + datetext_dur, font=ftext)[0] <= width - 2 * textoffs_x and nowtext < begintext \
                 and e["day"] == 0:
