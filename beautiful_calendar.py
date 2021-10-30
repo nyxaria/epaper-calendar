@@ -140,7 +140,7 @@ def draw_short_event(d, e, other):
         dt = datetime.datetime.now()
         dt.replace(hour=dt.hour+HOUR_OFFSET)
         begintext = "%02d:%02d" % ((e["start"]-60) // 60, e["start"] % 60)
-        nowtext = "%02d:%02d" % ((dt.hour - 4)%24, (dt.minute+30)%60)
+        nowtext = "%02d:%02d" % ((dt.hour + HOUR_OFFSET)%24, (dt.minute)%60)
 
         endtext = "%02d:%02d" % ((e["end"]-60) // 60, e["end"] % 60)
         datetext = "\n%s-%s" % (begintext, endtext)
@@ -199,8 +199,7 @@ def draw_short_event(d, e, other):
                 else:
                     print("too small, more than 2 collisions")
                     datetext = "\n%s" % begintext
-        elif d.textsize(datetext + datetext_dur, font=ftext)[0] <= width - 2 * textoffs_x and nowtext < begintext \
-                and e["day"] == 0:
+        elif d.textsize(datetext + datetext_dur, font=ftext)[0] <= width - 2 * textoffs_x and e["day"] == 0:
             print("jere")
             # dt = datetime.datetime.now()
             if "%02d:%02d" % (dt.hour - 1, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour, dt.minute):
