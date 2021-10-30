@@ -13,6 +13,8 @@ from PIL import Image, ImageDraw, ImageFont
 import ical_worker
 from config import *
 
+HOUR_OFFSET = -2
+
 #
 # URLS = [
 #     "webcal://calendar.google.com/calendar/u/2?cid=bWtzcXYwcWpiMmhzbXNyNjRmbmdoZGdkYzRAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ",
@@ -136,6 +138,7 @@ def draw_short_event(d, e, other):
         fulltext = fulltext[:-1]
     if e["end"] - e["start"] >= 60:
         dt = datetime.datetime.now()
+        dt.replace(hour=dt.hour+HOUR_OFFSET)
         begintext = "%02d:%02d" % ((e["start"]-60) // 60, e["start"] % 60)
         nowtext = "%02d:%02d" % ((dt.hour - 4)%24, (dt.minute+30)%60)
 
@@ -185,27 +188,38 @@ def draw_short_event(d, e, other):
                         print('last  hour')
                         datetext += " (-{}mins)".format(60 - abs(d_m))
 
-                    if "%02d:%02d" % (dt.hour, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour + 1, dt.minute):
+                    elif "%02d:%02d" % (dt.hour, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour + 1, dt.minute):
                         # in an hour
                         print('in an hour')
                         datetext += " ({}mins)".format(-d_m)
+                    else:
+                        print('comgin up')
+                        datetext += " ({}h)".format(d_h)
+
                 else:
                     print("too small, more than 2 collisions")
                     datetext = "\n%s" % begintext
         elif d.textsize(datetext + datetext_dur, font=ftext)[0] <= width - 2 * textoffs_x and nowtext < begintext \
                 and e["day"] == 0:
             print("jere")
-            if d_h <= 0:
-                print("d_h <= 0")
-                dt = datetime.datetime.now()
-                if "%02d:%02d" % (dt.hour, dt.minute) > begintext:
-                    print("PAST", (60 - e["start"]) % 60, dt.minute)
-                    d_m = ((60 - e["start"]) % 60) + dt.minute
-                    print(d_m)
-                    datetext_dur = " ({}mins)".format(-d_m)
-                else:
-                    print("-d_m > 0")
-                    datetext_dur = " ({}mins)".format(-d_m)
+            # dt = datetime.datetime.now()
+            if "%02d:%02d" % (dt.hour - 1, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour, dt.minute):
+                # in an hour
+                print('last  hour')
+                datetext += " (-{}mins)".format(60 - abs(d_m))
+
+            elif "%02d:%02d" % (dt.hour, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour + 1, dt.minute):
+                # in an hour
+                print('in an hour')
+                datetext += " ({}mins)".format(-d_m)
+                # if "%02d:%02d" % (dt.hour, dt.minute) > begintext:
+                #     print("PAST", (60 - e["start"]) % 60, dt.minute)
+                #     d_m = ((60 - e["start"]) % 60) + dt.minute
+                #     print(d_m)
+                #     datetext_dur = " ({}mins)".format(-d_m)
+                # else:
+                #     print("-d_m > 0")
+                #     datetext_dur = " ({}mins)".format(-d_m)
             print("passed!")
             datetext += datetext_dur
         # if d.textsize(datetext, font=ftext)[0] <= width - 2 * textoffs_x:
@@ -270,7 +284,7 @@ if __name__ == "__main__":
 
     draw_other = ImageDraw.Draw(Other)
     x_start = offset_left + bar_left
-    y_start = offset_top + bar_top + offset_allday + math.floor((now.minute+now.hour*60+60 - (BEGIN_DAY * 60)) * per_hour / 60)
+    y_start = offset_top + bar_top + offset_allday + math.floor((now.minute+(now.hour+HOUR_OFFSET)*60+60 - (BEGIN_DAY * 60)) * per_hour / 60)
     width = int(per_day)
     # width = (epd7in5b_V2.EPD_WIDTH - 3 - offset_left - bar_left) / DAYS
     # clear the event's area and make the outline
