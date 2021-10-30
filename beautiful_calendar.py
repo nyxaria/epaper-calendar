@@ -178,7 +178,19 @@ def draw_short_event(d, e, other):
                     print("passed chunky!")
                     datetext += datetext_dur
             else:
-                datetext = "\n%s" % begintext
+                if e["max_collision"] <= 2:
+                    if "%02d:%02d" % (dt.hour - 1, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour, dt.minute):
+                        # in an hour
+                        print('last  hour')
+                        datetext += " (-{}mins)".format(60 - abs(d_m))
+
+                    if "%02d:%02d" % (dt.hour, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour + 1, dt.minute):
+                        # in an hour
+                        print('in an hour')
+                        datetext += " ({}mins)".format(-d_m)
+                else:
+                    print("too small")
+                    datetext = "\n%s" % begintext
         elif d.textsize(datetext + datetext_dur, font=ftext)[0] <= width - 2 * textoffs_x and nowtext < begintext \
                 and e["day"] == 0:
             print("jere")
