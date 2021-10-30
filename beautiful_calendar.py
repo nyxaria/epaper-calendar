@@ -52,8 +52,7 @@ def prepare_grid(d, other):
 
     import datetime
 
-    now = datetime.datetime.now()
-    now.replace(hour=now.hour + HOUR_OFFSET)
+    now = datetime.datetime.now() + datetime.timedelta(hours=HOUR_OFFSET)
     d.line([(offset_left + bar_left - 1, offset_left + 31), (offset_left + bar_left - 1, epd7in5b_V2.EPD_WIDTH*2)], width=2)
 
     # separate all-day events from grid
@@ -133,8 +132,7 @@ def draw_short_event(d, e, other):
     textoffs_y = 5
     textoffs_x = (per_hour - text_size) // 2 - 9
 
-    dt = datetime.datetime.now()
-    dt.replace(hour=dt.hour + HOUR_OFFSET)
+    dt = datetime.datetime.now() + datetime.timedelta(hours=HOUR_OFFSET)
     print("dt time: ", dt.hour, ":", dt.minute)
 
     fulltext = e["title"]
