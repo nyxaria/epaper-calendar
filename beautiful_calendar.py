@@ -13,7 +13,7 @@ from PIL import Image, ImageDraw, ImageFont
 import ical_worker
 from config import *
 
-HOUR_OFFSET = -6
+HOUR_OFFSET = -12
 
 #
 # URLS = [
