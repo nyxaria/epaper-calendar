@@ -160,9 +160,14 @@ def draw_short_event(d, e, other):
                 datetext = "\n%s" % begintext
         elif d.textsize(datetext + datetext_dur, font=ftext)[0] <= width - 2 * textoffs_x and nowtext < begintext \
                 and e["day"] == 0:
-            if d_h == 0:
-                print("d_h == 1")
-                datetext_dur = " ({}mins)".format(-d_m)
+            if d_h <= 0:
+                print("d_h <= 0")
+                if -d_m < 0:
+                    d_m = (60 - e["start"] % 60) + dt.minute
+                    datetext_dur = " ({}mins)".format(-d_m)
+                else:
+                    print("-d_m > 0")
+                    datetext_dur = " ({}mins)".format(-d_m)
             print("passed!")
             datetext += datetext_dur
         # if d.textsize(datetext, font=ftext)[0] <= width - 2 * textoffs_x:
