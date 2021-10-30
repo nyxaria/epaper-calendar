@@ -139,12 +139,13 @@ def draw_short_event(d, e, other):
         endtext = "%02d:%02d" % ((e["end"]-60) // 60, e["end"] % 60)
         datetext = "\n%s-%s" % (begintext, endtext)
 
+        d_h = datetime.datetime.now().hour - (e["start"] - 60) // 60
+        d_m = datetime.datetime.now().minute - e["start"] % 60
+        datetext_dur = " ({}h {}m)".format(d_h, d_m)
         if d.textsize(datetext, font=ftext)[0] > width - 2 * textoffs_x:
             datetext = "\n%s" % begintext
-        else:
-            d_h = datetime.datetime.now().hour - (e["start"]-60) // 60
-            d_m = datetime.datetime.now().minute - e["start"] % 60
-            datetext += " ({}h {}m)".format(d_h, d_m)
+        elif d.textsize(datetext + datetext_dur, font=ftext)[0] <= width - 2 * textoffs_x:
+            datetext += datetext_dur
         # if d.textsize(datetext, font=ftext)[0] <= width - 2 * textoffs_x:
         fulltext += datetext
     if not RED and True in truth:
