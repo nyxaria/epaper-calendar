@@ -147,7 +147,7 @@ def draw_short_event(d, e, other):
         datetext_dur = " ({}h{}m)".format(d_h, abs(d_m))
         print("trying", e["title"], e["end"] - e["start"], nowtext, begintext, d_m, d_h)
         print(d.textsize(datetext + datetext_dur, font=ftext)[0], width-2*textoffs_x, d_h, d_m, e["day"], nowtext < begintext)
-        if d.textsize(datetext, font=ftext)[0] > width - 2 * textoffs_x:
+        if d.textsize(datetext + datetext_dur, font=ftext)[0] > width - 2 * textoffs_x:
             print("cutoff")
             if e["end"] - e["start"] >= 90:
                 print("more than 90 mins")
