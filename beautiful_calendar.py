@@ -200,6 +200,7 @@ def draw_short_event(d, e, other):
                     print("too small, more than 2 collisions")
                     datetext = "\n%s" % begintext
         elif d.textsize(datetext + datetext_dur, font=ftext)[0] <= width - 2 * textoffs_x and e["day"] == 0:
+            # big enough
             print("jere")
             # dt = datetime.datetime.now()
             if "%02d:%02d" % (dt.hour - 1, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour, dt.minute):
@@ -219,8 +220,10 @@ def draw_short_event(d, e, other):
                 # else:
                 #     print("-d_m > 0")
                 #     datetext_dur = " ({}mins)".format(-d_m)
-            print("passed!")
-            datetext += datetext_dur
+            else:
+
+                print("vnilla!")
+                datetext += datetext_dur
         # if d.textsize(datetext, font=ftext)[0] <= width - 2 * textoffs_x:
         fulltext += datetext
     if not RED and True in truth:
