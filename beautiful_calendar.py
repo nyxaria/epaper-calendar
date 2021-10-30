@@ -137,7 +137,7 @@ def draw_short_event(d, e, other):
     if e["end"] - e["start"] >= 60:
         dt = datetime.datetime.now()
         begintext = "%02d:%02d" % ((e["start"]-60) // 60, e["start"] % 60)
-        nowtext = "%02d:%02d" % (dt.hour - 1, dt.minute)
+        nowtext = "%02d:%02d" % (dt.hour - 2, dt.minute)
 
         endtext = "%02d:%02d" % ((e["end"]-60) // 60, e["end"] % 60)
         datetext = "\n%s-%s" % (begintext, endtext)
