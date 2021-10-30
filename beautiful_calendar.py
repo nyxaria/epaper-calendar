@@ -137,7 +137,7 @@ def draw_short_event(d, e, other):
     if e["end"] - e["start"] >= 60:
         dt = datetime.datetime.now()
         begintext = "%02d:%02d" % ((e["start"]-60) // 60, e["start"] % 60)
-        nowtext = "%02d:%02d" % (dt.hour, dt.minute)
+        nowtext = "%02d:%02d" % (dt.hour - 1, dt.minute)
 
         endtext = "%02d:%02d" % ((e["end"]-60) // 60, e["end"] % 60)
         datetext = "\n%s-%s" % (begintext, endtext)
@@ -145,15 +145,24 @@ def draw_short_event(d, e, other):
         d_h = -(dt.hour - (e["start"] - 60) // 60)
         d_m = (dt.minute - e["start"] % 60)
         datetext_dur = " ({}h{}m)".format(d_h, abs(d_m))
-        print("trying", e["title"])
+        print("trying", e["title"], e["end"] - e["start"])
         print(d.textsize(datetext + datetext_dur, font=ftext)[0], width-2*textoffs_x, d_h, d_m, e["day"], nowtext < begintext)
         if d.textsize(datetext, font=ftext)[0] > width - 2 * textoffs_x:
-            datetext = "\n%s" % begintext
-        elif d.textsize(datetext + datetext_dur, font=ftext)[0] <= width - 2 * textoffs_x and d_h >= 0 \
+            if e["end"] - e["start"] >= 90:
+                datetext = "\n%s" % begintext
+                if nowtext > begintext and e["day"] == 0:
+                    if d_h == 0:
+                        print("d_h == 1")
+                        datetext_dur = "\n({}mins)".format(d_m)
+                    print("passed chunky!")
+                    datetext += datetext_dur
+            else:
+                datetext = "\n%s" % begintext
+        elif d.textsize(datetext + datetext_dur, font=ftext)[0] <= width - 2 * textoffs_x and nowtext > begintext \
                 and e["day"] == 0:
             if d_h == 0:
                 print("d_h == 1")
-                datetext_dur = " ({}mins)".format(d_m)
+                datetext_dur = " ({}mins)".format(-d_m)
             print("passed!")
             datetext += datetext_dur
         # if d.textsize(datetext, font=ftext)[0] <= width - 2 * textoffs_x:
