@@ -145,10 +145,11 @@ def draw_short_event(d, e, other):
         d_h = -(dt.hour - (e["start"] - 60) // 60)
         d_m = (dt.minute - e["start"] % 60)
         datetext_dur = " ({}h{}m)".format(d_h, abs(d_m))
-        print("trying", e["title"], e["end"] - e["start"])
+        print("trying", e["title"], e["end"] - e["start"], d_m, d_h)
         print(d.textsize(datetext + datetext_dur, font=ftext)[0], width-2*textoffs_x, d_h, d_m, e["day"], nowtext < begintext)
         if d.textsize(datetext, font=ftext)[0] > width - 2 * textoffs_x:
             if e["end"] - e["start"] >= 90:
+                print("more than 90 mins")
                 datetext = "\n%s" % begintext
                 if nowtext < begintext and e["day"] == 0:
                     if d_h == 0:
@@ -160,6 +161,7 @@ def draw_short_event(d, e, other):
                 datetext = "\n%s" % begintext
         elif d.textsize(datetext + datetext_dur, font=ftext)[0] <= width - 2 * textoffs_x and nowtext < begintext \
                 and e["day"] == 0:
+            print("jere")
             if d_h <= 0:
                 print("d_h <= 0")
                 dt = datetime.datetime.now()
