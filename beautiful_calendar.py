@@ -150,7 +150,7 @@ def draw_short_event(d, e, other):
         if d.textsize(datetext, font=ftext)[0] > width - 2 * textoffs_x:
             if e["end"] - e["start"] >= 90:
                 datetext = "\n%s" % begintext
-                if nowtext > begintext and e["day"] == 0:
+                if nowtext < begintext and e["day"] == 0:
                     if d_h == 0:
                         print("d_h == 1")
                         datetext_dur = "\n({}mins)".format(d_m)
@@ -158,7 +158,7 @@ def draw_short_event(d, e, other):
                     datetext += datetext_dur
             else:
                 datetext = "\n%s" % begintext
-        elif d.textsize(datetext + datetext_dur, font=ftext)[0] <= width - 2 * textoffs_x and nowtext > begintext \
+        elif d.textsize(datetext + datetext_dur, font=ftext)[0] <= width - 2 * textoffs_x and nowtext < begintext \
                 and e["day"] == 0:
             if d_h == 0:
                 print("d_h == 1")
