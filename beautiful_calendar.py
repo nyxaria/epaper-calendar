@@ -152,11 +152,18 @@ def draw_short_event(d, e, other):
             if e["end"] - e["start"] >= 90:
                 print("more than 90 mins")
                 datetext = "\n%s" % begintext
+
+                if "%02d:%02d" % (dt.hour-1, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour, dt.minute):
+                    # in an hour
+                    print('last  hour')
+                    datetext += " (-{}mins)".format(60-abs(d_m))
+
                 if "%02d:%02d" % (dt.hour, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour+1, dt.minute):
                     # in an hour
                     print('in an hour')
                     datetext += " ({}mins)".format(-d_m)
                 if nowtext < begintext and e["day"] == 0:
+                    print("jjjeere", d_h)
                     if d_h <= 0:
                         print("d_h <= 0")
                         dt = datetime.datetime.now()
@@ -164,10 +171,10 @@ def draw_short_event(d, e, other):
                             print("PAST", (60 - e["start"]) % 60, dt.minute)
                             d_m = ((60 - e["start"]) % 60) + dt.minute
                             print(d_m)
-                            datetext_dur = " ({}mins)".format(-d_m)
+                            datetext_dur = "\n({}mins)".format(-d_m)
                         else:
                             print("coming up -d_m > 0")
-                            datetext_dur = " ({}mins)".format(-d_m)
+                            datetext_dur = "\n({}mins)".format(-d_m)
                     print("passed chunky!")
                     datetext += datetext_dur
             else:
