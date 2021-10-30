@@ -176,6 +176,8 @@ def draw_short_event(d, e, other):
                 datetext = "\n%s" % begintext
                 if e["max_collision"] <= 2 and e["day"] == 0:
                     print('collision == 2')
+                    print("hour ago:", "%02d:%02d" % (dt.hour-1, dt.minute))
+                    print("now:", "%02d:%02d" % (dt.hour, dt.minute))
                     if "%02d:%02d" % (dt.hour - 1, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour, dt.minute):
                         # in an hour
                         print('last  hour')
