@@ -151,38 +151,30 @@ def draw_short_event(d, e, other):
         print("trying", e["title"], e["end"] - e["start"], nowtext, begintext, d_m, d_h)
         print(d.textsize(datetext + datetext_dur, font=ftext)[0], width-2*textoffs_x, d_h, d_m, e["day"], nowtext < begintext)
         if d.textsize(datetext + datetext_dur, font=ftext)[0] > width - 2 * textoffs_x:
-            print("cutoff")
+            print("cutoff, text too long ")
             if e["end"] - e["start"] >= 90:
                 print("more than 90 mins")
                 datetext = "\n%s" % begintext
 
-                if "%02d:%02d" % (dt.hour-1, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour, dt.minute):
+                if "%02d:%02d" % (dt.hour-1, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour, dt.minute) and e["day"] == 0:
                     # in an hour
                     print('last  hour')
                     datetext += " (-{}mins)".format(60-abs(d_m))
 
-                if "%02d:%02d" % (dt.hour, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour+1, dt.minute):
+                elif "%02d:%02d" % (dt.hour, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour+1, dt.minute) and e["day"] == 0:
                     # in an hour
                     print('in an hour')
                     datetext += " ({}mins)".format(-d_m)
-                if nowtext < begintext and e["day"] == 0:
-                    print("jjjeere", d_h)
-                    if d_h <= 0:
-                        print("d_h <= 0")
-                        dt = datetime.datetime.now()
-                        if "%02d:%02d" % (dt.hour, dt.minute) > begintext:
-                            print("PAST", (60 - e["start"]) % 60, dt.minute)
-                            d_m = ((60 - e["start"]) % 60) + dt.minute
-                            print(d_m)
-                            datetext_dur = "\n({}mins)".format(-d_m)
-                        else:
-                            print("coming up -d_m > 0")
-                            datetext_dur = "\n({}mins)".format(-d_m)
-                    print("passed chunky!")
+                elif begintext >= "%02d:%02d" % (dt.hour+1, dt.minute) and e["day"] == 0:
+                    print("over an hour", d_h)
                     datetext += datetext_dur
+
+                print("passed chunky!")
             else:
+                print('less than 90 mins')
                 datetext = "\n%s" % begintext
-                if e["max_collision"] <= 2:
+                if e["max_collision"] <= 2 and e["day"] == 0:
+                    print('collision == 2')
                     if "%02d:%02d" % (dt.hour - 1, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour, dt.minute):
                         # in an hour
                         print('last  hour')
@@ -192,16 +184,17 @@ def draw_short_event(d, e, other):
                         # in an hour
                         print('in an hour')
                         datetext += " ({}mins)".format(-d_m)
-                    else:
+                    elif begintext >= "%02d:%02d" % (dt.hour + 1, dt.minute):
                         print('comgin up')
                         datetext += " ({}h)".format(d_h)
 
                 else:
                     print("too small, more than 2 collisions")
                     datetext = "\n%s" % begintext
-        elif d.textsize(datetext + datetext_dur, font=ftext)[0] <= width - 2 * textoffs_x and e["day"] == 0:
+        elif d.textsize(datetext + datetext_dur, font=ftext)[0] <= width - 2 * textoffs_x and e["day"] == 0 and \
+                "%02d:%02d" % (dt.hour - 1, dt.minute) <= begintext:
             # big enough
-            print("jere")
+            print("big enough")
             # dt = datetime.datetime.now()
             if "%02d:%02d" % (dt.hour - 1, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour, dt.minute):
                 # in an hour
@@ -220,9 +213,8 @@ def draw_short_event(d, e, other):
                 # else:
                 #     print("-d_m > 0")
                 #     datetext_dur = " ({}mins)".format(-d_m)
-            else:
-
-                print("vnilla!")
+            elif begintext >= "%02d:%02d" % (dt.hour + 1, dt.minute):
+                print("over an hour!")
                 datetext += datetext_dur
         # if d.textsize(datetext, font=ftext)[0] <= width - 2 * textoffs_x:
         fulltext += datetext
