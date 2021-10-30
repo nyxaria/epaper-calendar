@@ -84,7 +84,7 @@ def prepare_grid(d, other):
                 d.point([(j, x)])
         # draw the hour number
         textoffs_y = math.floor((per_hour - text_size) / 2)
-        d.text((offset_left, x + textoffs_y - 1), "%02d" % (BEGIN_DAY + i), font=fhours)
+        d.text((offset_left, x + textoffs_y - 1 + 15), "%02d" % (BEGIN_DAY + i), font=fhours)
 
     x = offset_top + bar_top + offset_allday + per_hour * (hours_day)
     for j in range(offset_left, width*3, 4):
