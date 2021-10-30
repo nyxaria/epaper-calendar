@@ -129,7 +129,7 @@ def draw_short_event(d, e, other):
         d.rectangle((x_start, y_start, x_start + width, y_end), outline=0, width=2, fill=200)
 
     textoffs_y = 5
-    textoffs_x = (per_hour - text_size) // 2 - 3
+    textoffs_x = (per_hour - text_size) // 2 - 7
 
     fulltext = e["title"]
     while d.textsize(fulltext, font=ftext)[0] > width - 2 * textoffs_x and len(fulltext) > 0:
@@ -178,6 +178,7 @@ def draw_short_event(d, e, other):
                     print("passed chunky!")
                     datetext += datetext_dur
             else:
+                datetext = "\n%s" % begintext
                 if e["max_collision"] <= 2:
                     if "%02d:%02d" % (dt.hour - 1, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour, dt.minute):
                         # in an hour
