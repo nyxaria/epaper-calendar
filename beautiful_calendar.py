@@ -141,6 +141,10 @@ def draw_short_event(d, e, other):
 
         if d.textsize(datetext, font=ftext)[0] > width - 2 * textoffs_x:
             datetext = "\n%s" % begintext
+        else:
+            d_h = datetime.datetime.now().hour - (e["start"]-60) // 60
+            d_m = datetime.datetime.now().minute - e["start"] % 60
+            datetext += " ({}h {}m)".format(d_h, d_m)
         # if d.textsize(datetext, font=ftext)[0] <= width - 2 * textoffs_x:
         fulltext += datetext
     if not RED and True in truth:
