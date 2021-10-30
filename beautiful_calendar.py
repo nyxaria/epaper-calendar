@@ -141,16 +141,16 @@ def draw_short_event(d, e, other):
 
         d_h = -(datetime.datetime.now().hour - (e["start"] - 60) // 60)
         d_m = (datetime.datetime.now().minute - e["start"] % 60)
-        datetext_dur = " ({}h{}m)".format(d_h, d_m)
+        datetext_dur = " ({}h{}m)".format(d_h, abs(d_m))
         print("trying", e["title"])
         print(d.textsize(datetext + datetext_dur, font=ftext)[0], width-2*textoffs_x, d_h, d_m, e["day"])
         if d.textsize(datetext, font=ftext)[0] > width - 2 * textoffs_x:
             datetext = "\n%s" % begintext
-        elif d.textsize(datetext + datetext_dur, font=ftext)[0] <= width - 2 * textoffs_x and d_m > 0 and d_h >= 0 \
+        elif d.textsize(datetext + datetext_dur, font=ftext)[0] <= width - 2 * textoffs_x and d_h >= 0 \
                 and e["day"] == 0:
             if d_h == 0:
                 print("d_h == 1")
-                datetext_dur = " ({}mins)".format(d_m)
+                datetext_dur = " ({}mins)".format(abs(d_m))
             print("passed!")
             datetext += datetext_dur
         # if d.textsize(datetext, font=ftext)[0] <= width - 2 * textoffs_x:
