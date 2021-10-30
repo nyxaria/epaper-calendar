@@ -144,7 +144,7 @@ def draw_short_event(d, e, other):
         datetext_dur = " ({}h{}m)".format(d_h, d_m)
         if d.textsize(datetext, font=ftext)[0] > width - 2 * textoffs_x:
             datetext = "\n%s" % begintext
-        elif d.textsize(datetext + datetext_dur, font=ftext)[0] <= width - 2 * textoffs_x and d_m > 0 and d_h >= 0:
+        elif d.textsize(datetext + datetext_dur, font=ftext)[0] <= width - 2 * textoffs_x and d_m > 0 and d_h >= 0 and e["day"] == 0:
             if d_h == 0:
                 datetext_dur = " ({}mins)".format(d_m)
             datetext += datetext_dur
