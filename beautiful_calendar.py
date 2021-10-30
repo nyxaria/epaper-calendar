@@ -13,7 +13,7 @@ from PIL import Image, ImageDraw, ImageFont
 import ical_worker
 from config import *
 
-HOUR_OFFSET = -12
+HOUR_OFFSET = 0
 
 #
 # URLS = [
@@ -184,7 +184,7 @@ def draw_short_event(d, e, other):
                     elif "%02d:%02d" % (dt.hour, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour + 1, dt.minute):
                         # in an hour
                         print('in an hour')
-                        datetext += " ({}mins)".format(-d_m)
+                        datetext += " ({}mins)".format(abs(d_m))
                     elif begintext >= "%02d:%02d" % (dt.hour + 1, dt.minute):
                         print('comgin up')
                         datetext += " ({}h)".format(d_h)
@@ -205,7 +205,7 @@ def draw_short_event(d, e, other):
             elif "%02d:%02d" % (dt.hour, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour + 1, dt.minute):
                 # in an hour
                 print('in an hour')
-                datetext += " ({}mins)".format(-d_m)
+                datetext += " ({}mins)".format(abs(d_m))
                 # if "%02d:%02d" % (dt.hour, dt.minute) > begintext:
                 #     print("PAST", (60 - e["start"]) % 60, dt.minute)
                 #     d_m = ((60 - e["start"]) % 60) + dt.minute
