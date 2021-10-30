@@ -133,13 +133,14 @@ def draw_short_event(d, e, other):
     textoffs_y = 5
     textoffs_x = (per_hour - text_size) // 2 - 9
 
+    dt = datetime.datetime.now()
+    dt.replace(hour=dt.hour + HOUR_OFFSET)
+    print("dt time: ", dt.hour, ":", dt.minute)
+
     fulltext = e["title"]
     while d.textsize(fulltext, font=ftext)[0] > width - 2 * textoffs_x and len(fulltext) > 0:
         fulltext = fulltext[:-1]
     if e["end"] - e["start"] >= 60:
-        dt = datetime.datetime.now()
-        dt.replace(hour=dt.hour+HOUR_OFFSET)
-        print("dt time: ", dt.hour, ":", dt.minute)
         begintext = "%02d:%02d" % ((e["start"]-60) // 60, e["start"] % 60)
         nowtext = "%02d:%02d" % ((dt.hour)%24, (dt.minute)%60)
 
