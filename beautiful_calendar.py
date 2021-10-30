@@ -153,7 +153,7 @@ def draw_short_event(d, e, other):
                 and e["day"] == 0:
             if d_h == 0:
                 print("d_h == 1")
-                datetext_dur = " ({}mins)".format(abs(d_m))
+                datetext_dur = " ({}mins)".format(d_m)
             print("passed!")
             datetext += datetext_dur
         # if d.textsize(datetext, font=ftext)[0] <= width - 2 * textoffs_x:
