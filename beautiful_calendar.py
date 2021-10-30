@@ -129,7 +129,7 @@ def draw_short_event(d, e, other):
         d.rectangle((x_start, y_start, x_start + width, y_end), outline=0, width=2, fill=200)
 
     textoffs_y = 5
-    textoffs_x = (per_hour - text_size) // 2 - 1
+    textoffs_x = (per_hour - text_size) // 2 - 3
 
     fulltext = e["title"]
     while d.textsize(fulltext, font=ftext)[0] > width - 2 * textoffs_x and len(fulltext) > 0:
