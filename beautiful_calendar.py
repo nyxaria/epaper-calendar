@@ -156,7 +156,7 @@ def draw_short_event(d, e, other):
                 print("more than 90 mins")
                 datetext = "\n%s" % begintext
 
-                if "%02d:%02d" % (dt.hour-1, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour, dt.minute) and e["day"] == 0:
+                if "%02d:%02d" % (dt.hour-1, dt.minute) <= begintext < "%02d:%02d" % (dt.hour, dt.minute) and e["day"] == 0:
                     print('last  hour')
                     datetext += " (-{}mins)".format(60 - abs(d_m))
 
@@ -176,7 +176,7 @@ def draw_short_event(d, e, other):
                     print('collision == 2')
                     print("hour ago:", "%02d:%02d" % (dt.hour-1, dt.minute))
                     print("now:", "%02d:%02d" % (dt.hour, dt.minute))
-                    if "%02d:%02d" % (dt.hour - 1, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour, dt.minute):
+                    if "%02d:%02d" % (dt.hour - 1, dt.minute) <= begintext < "%02d:%02d" % (dt.hour, dt.minute):
                         # in an hour
                         print('last  hour')
                         datetext += " (-{}mins)".format(60 - abs(d_m))
@@ -197,7 +197,7 @@ def draw_short_event(d, e, other):
             # big enough
             print("big enough")
             # dt = datetime.datetime.now()
-            if "%02d:%02d" % (dt.hour - 1, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour, dt.minute):
+            if "%02d:%02d" % (dt.hour - 1, dt.minute) <= begintext < "%02d:%02d" % (dt.hour, dt.minute):
                 # in an hour
                 print('last  hour')
                 datetext += " (-{}mins)".format(60-abs(d_m))
