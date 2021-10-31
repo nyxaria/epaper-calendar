@@ -167,7 +167,7 @@ def draw_short_event(d, e, other):
 
                     _now = datetime.datetime.strptime("%02d:%02d" % (dt.hour, dt.minute), '%H:%M')
                     _begin = datetime.datetime.strptime(begintext, "%H:%M")
-                    datetext += " ({}mins)".format(abs((_now - _begin).total_seconds()) // 60)
+                    datetext += " ({}mins)".format(int(abs((_now - _begin).total_seconds()) // 60))
                 elif begintext >= "%02d:%02d" % (dt.hour+1, dt.minute) and e["day"] == 0:
                     print("over an hour", d_h)
                     datetext += datetext_dur
@@ -191,7 +191,7 @@ def draw_short_event(d, e, other):
 
                         _now = datetime.datetime.strptime("%02d:%02d" % (dt.hour, dt.minute), '%H:%M')
                         _begin = datetime.datetime.strptime(begintext, "%H:%M")
-                        datetext += " ({}mins)".format(abs((_now - _begin).total_seconds()) // 60)
+                        datetext += " ({}mins)".format(int(abs((_now - _begin).total_seconds()) // 60))
 
                         # datetext += " ({}mins)".format(abs(d_m))
                     elif begintext >= "%02d:%02d" % (dt.hour + 1, dt.minute):
@@ -216,7 +216,7 @@ def draw_short_event(d, e, other):
                 print('in an hour')
                 _now = datetime.datetime.strptime("%02d:%02d" % (dt.hour, dt.minute), '%H:%M')
                 _begin = datetime.datetime.strptime(begintext, "%H:%M")
-                datetext += " ({}mins)".format(abs((_now - _begin).total_seconds()) // 60)
+                datetext += " ({}mins)".format(int(abs((_now - _begin).total_seconds()) // 60))
                 # if "%02d:%02d" % (dt.hour, dt.minute) > begintext:
                 #     print("PAST", (60 - e["start"]) % 60, dt.minute)
                 #     d_m = ((60 - e["start"]) % 60) + dt.minute
