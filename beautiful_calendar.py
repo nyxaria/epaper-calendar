@@ -200,12 +200,12 @@ def draw_short_event(d, e, other):
             if "%02d:%02d" % (dt.hour - 1, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour, dt.minute):
                 # in an hour
                 print('last  hour')
-                datetext += " (-{}mins)".format(abs(d_m))
+                datetext += " (-{}mins)".format(60-abs(d_m))
 
             elif "%02d:%02d" % (dt.hour, dt.minute) <= begintext <= "%02d:%02d" % (dt.hour + 1, dt.minute):
                 # in an hour
                 print('in an hour')
-                datetext += " ({}mins)".format(60 - abs(d_m))
+                datetext += " ({}mins)".format(abs(d_m))
                 # if "%02d:%02d" % (dt.hour, dt.minute) > begintext:
                 #     print("PAST", (60 - e["start"]) % 60, dt.minute)
                 #     d_m = ((60 - e["start"]) % 60) + dt.minute
