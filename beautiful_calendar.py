@@ -145,8 +145,8 @@ def draw_short_event(d, e, other):
         endtext = "%02d:%02d" % ((e["end"]-60) // 60, e["end"] % 60)
         datetext = "\n%s-%s" % (begintext, endtext)
 
-        d_h = -(dt.hour - (e["start"] - 60) // 60)
-        d_m = (dt.minute - e["start"] % 60)
+        d_h = -(dt.hour - (e["start"])) // 60
+        d_m = (dt.minute - e["start"]) % 60
         datetext_dur = " ({}h{}m)".format(d_h, abs(d_m))
         print("trying", e["title"], e["end"] - e["start"], nowtext, begintext, d_m, d_h)
         print(d.textsize(datetext + datetext_dur, font=ftext)[0], width-2*textoffs_x, d_h, d_m, e["day"], nowtext < begintext)
