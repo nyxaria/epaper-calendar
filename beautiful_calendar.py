@@ -145,7 +145,7 @@ def draw_short_event(d, e, other):
         endtext = "%02d:%02d" % ((e["end"]-60) // 60, e["end"] % 60)
         datetext = "\n%s-%s" % (begintext, endtext)
 
-        d_h = 1 + dt.hour - (e["start"]) // 60
+        d_h = 2 + dt.hour - (e["start"]) // 60
         d_m = dt.minute - (e["start"]) % 60
         datetext_dur = " ({}h{}m)".format(abs(d_h), 60 - abs(d_m))
 
