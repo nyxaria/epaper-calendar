@@ -176,9 +176,9 @@ def draw_short_event(d, e, other):
                     datetext += " ({}mins)".format(int(abs((_now - _begin).total_seconds()) // 60))
                     print(_now, _begin, int(abs((_now - _begin).total_seconds()) // 60))
 
-                elif begintext >= "%02d:%02d" % (dt.hour+1, dt.minute) and e["day"] == 0:
-                    print("over an hour", d_h)
-                    datetext += datetext_dur
+                # elif begintext >= "%02d:%02d" % (dt.hour+1, dt.minute) and e["day"] == 0:
+                #     print("over an hour", d_h)
+                #     datetext += datetext_dur
 
                 print("passed chunky!")
             else:
@@ -208,9 +208,9 @@ def draw_short_event(d, e, other):
                         print(_now, _begin, int(abs((_now - _begin).total_seconds()) // 60))
 
                         # datetext += " ({}mins)".format(abs(d_m))
-                    elif begintext >= "%02d:%02d" % (dt.hour + 1, dt.minute):
-                        print('comgin up')
-                        datetext += " ({}h)".format(d_h)
+                    # elif begintext >= "%02d:%02d" % (dt.hour + 1, dt.minute):
+                    #     print('comgin up')
+                    #     datetext += " ({}h)".format(d_h)
 
                 else:
                     print("too small, more than 2 collisions")
