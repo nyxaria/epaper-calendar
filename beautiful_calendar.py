@@ -125,7 +125,7 @@ def draw_short_event(d, e, other):
         if not RED:
             d.rectangle((x_start, y_start, x_start + width, y_end), outline=0, width=2, fill=200)
         else:
-            other.rectangle((x_start, y_start, x_start + width, y_end), outline=0, width=2, fill=200)
+            other.rectangle((x_start, y_start, x_start + width, y_end), outline=0, width=3, fill=200)
     else:
         d.rectangle((x_start, y_start, x_start + width, y_end), outline=0, width=2, fill=200)
 
