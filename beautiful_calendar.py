@@ -86,13 +86,13 @@ def prepare_grid(d, other):
         d.text((offset_left, x + textoffs_y - 1 + 15), "%02d" % (BEGIN_DAY + i), font=fhours)
 
     x = offset_top + bar_top + offset_allday + per_hour * (hours_day)
-    for j in range(offset_left, width*3, 4):
+    for j in range(offset_left + bar_left, width*3, 4):
         d.point([(j, x)])
     x = offset_top + bar_top + offset_allday + per_hour * (hours_day + 1)
-    for j in range(offset_left, width*3, 4):
+    for j in range(offset_left + bar_left, width*3, 4):
         d.point([(j, x)])
     x = offset_top + bar_top + offset_allday + per_hour * (hours_day + 2)
-    for j in range(offset_left, width*3, 4):
+    for j in range(offset_left + bar_left, width*3, 4):
         d.point([(j, x)])
     d.text((offset_left, offset_top), ("0" if now.hour < 10 else "") + str(now.hour) + ":" +
            ("0" if now.minute < 10 else "") + str(now.minute), font=ftext)
