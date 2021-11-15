@@ -360,10 +360,10 @@ if __name__ == "__main__":
 
     textoffs_y = 5
     textoffs_x = (per_hour - text_size) // 2 - 9
-    x_start = offset_left + bar_left + 0.5 * per_day
+    x_start = offset_left + bar_left + 0.5 * per_day - d.textsize("~ sleep ~", font=ftext)[0]/2
     y_start = offset_top + bar_top + offset_allday + math.floor((23.5*60 - (BEGIN_DAY * 60)) * per_hour / 60)
     d.text((x_start + textoffs_x, y_start + textoffs_y), "~ sleep ~", font=ftext)
-    x_start = offset_left + bar_left + 1.5 * per_day
+    x_start = offset_left + bar_left + 1.5 * per_day - d.textsize("~ sleep ~", font=ftext)[0]/2
     d.text((x_start + textoffs_x, y_start + textoffs_y), "~ sleep ~", font=ftext)
 
     im.save(open("out.jpg", "w+"))
