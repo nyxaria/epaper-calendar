@@ -363,7 +363,8 @@ if __name__ == "__main__":
         draw_other.line((x_start, y_start, x_start + width, y_start), width=4)
 
     textoffs_y = 5
-    textoffs_x = (per_hour - text_size) // 2 - 9
+    # textoffs_x = (per_hour - text_size) // 2 - 9
+    textoffs_x = 0
     x_start = offset_left + bar_left + 0.5 * per_day - d.textsize("~ sleep ~", font=ftext)[0]/2
     y_start = offset_top + bar_top + offset_allday + math.floor((24*60 - (BEGIN_DAY * 60)) * per_hour / 60)
     d.text((x_start + textoffs_x, y_start + textoffs_y), "~ sleep ~", font=ftext)
