@@ -357,10 +357,10 @@ if __name__ == "__main__":
     for e in all_days:
         draw_allday_event(d, e)
 
+    if now.hour+HOUR_OFFSET < 23:
+        draw_other.ellipse((x_start - r, y_start - r, x_start + r, y_start + r), width=10)
 
-    draw_other.ellipse((x_start - r, y_start - r, x_start + r, y_start + r), width=10)
-
-    draw_other.line((x_start, y_start, x_start + width, y_start), width=4)
+        draw_other.line((x_start, y_start, x_start + width, y_start), width=4)
 
     textoffs_y = 5
     textoffs_x = (per_hour - text_size) // 2 - 9
