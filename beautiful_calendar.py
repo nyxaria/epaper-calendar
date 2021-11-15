@@ -358,6 +358,10 @@ if __name__ == "__main__":
         draw_allday_event(d, e)
 
 
+    draw_other.ellipse((x_start - r, y_start - r, x_start + r, y_start + r), width=10)
+
+    draw_other.line((x_start, y_start, x_start + width, y_start), width=4)
+
     textoffs_y = 5
     textoffs_x = (per_hour - text_size) // 2 - 9
     x_start = offset_left + bar_left + 0.5 * per_day - d.textsize("~ sleep ~", font=ftext)[0]/2
@@ -368,9 +372,6 @@ if __name__ == "__main__":
 
     im.save(open("out.jpg", "w+"))
 
-    draw_other.ellipse((x_start - r, y_start - r, x_start + r, y_start + r), width=10)
-
-    draw_other.line((x_start, y_start, x_start + width, y_start), width=4)
 
     epd.display(epd.getbuffer(im), epd.getbuffer(Other))
     print("DONE DRAWING")
