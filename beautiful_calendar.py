@@ -257,6 +257,8 @@ def draw_short_event(d, e, other):
     else:
         d.text((x_start + textoffs_x, y_start + textoffs_y), fulltext, font=ftext)
 
+
+
     print(fulltext)
     # d.text((x_start + 5, y_start + text_size + textoffs_y), begintext + "-" + endtext, font=ftext)
 
@@ -354,6 +356,16 @@ if __name__ == "__main__":
             draw_short_event(d, e, draw_other)
     for e in all_days:
         draw_allday_event(d, e)
+
+
+    textoffs_y = 5
+    textoffs_x = (per_hour - text_size) // 2 - 9
+    x_start = offset_left + bar_left + 0.5 * per_day
+    y_start = offset_top + bar_top + offset_allday + math.floor((23.5*60 - (BEGIN_DAY * 60)) * per_hour / 60)
+    d.text((x_start + textoffs_x, y_start + textoffs_y), "~ sleep ~", font=ftext)
+    x_start = offset_left + bar_left + 1.5 * per_day
+    d.text((x_start + textoffs_x, y_start + textoffs_y), "~ sleep ~", font=ftext)
+
     im.save(open("out.jpg", "w+"))
 
     draw_other.ellipse((x_start - r, y_start - r, x_start + r, y_start + r), width=10)
