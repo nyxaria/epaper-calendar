@@ -156,6 +156,8 @@ def get_drawable_events():
                 evs = events(url, start=start, end=end, fix_apple=True)
             else:
                 evs = events(url, start=start, end=end)
+                for e in evs:
+                    e.summary += "!"
             all_events.extend(evs)
             print("Loaded ", url)
             print([(x.summary) for x in evs])
