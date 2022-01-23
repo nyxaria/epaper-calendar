@@ -154,7 +154,7 @@ def get_drawable_events():
         try:
             if "icloud.com" in url:
                 evs = events(url, start=start, end=end, fix_apple=True)
-            if "cam.ac.uk" in url:
+            elif "cam.ac.uk" in url:
                 evs = events(url, start=start, end=end, fix_apple=True)
                 for e in evs:
                     e.summary += "!"
